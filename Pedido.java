@@ -5,11 +5,13 @@ public class Pedido {
 	private String nomeVendedor;
 	private Data dia;
 	private ArrayList<Item> item;
+	private boolean status;
 	
-	public Pedido(int numero, String nomeVendedor, Data dia) {
+	public Pedido(int numero, String nomeVendedor, Data dia, boolean status) {
 		this.numero = numero;
 		this.nomeVendedor = nomeVendedor;
 		this.dia = dia;
+		this.status = status;
 		item = new ArrayList<Item>();
 	}
 
@@ -40,7 +42,14 @@ public class Pedido {
 	public ArrayList<Item> getItem() {
 		return item;
 	}
-	
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 	
 	
 }

@@ -6,12 +6,14 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private ArrayList<Pedido> pedidos;
+	private Perfil perfil;
 	
-	public Usuario(int identificador, String nome, String email, String senha) {
+	public Usuario(int identificador, String nome, String email, String senha, Perfil perfil) {
 		this.identificador = identificador;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.perfil = perfil;
 		pedidos = new ArrayList<Pedido>();
 	}
 
@@ -50,6 +52,16 @@ public class Usuario {
 	public ArrayList<Pedido> getPedidos() {
 		return pedidos;
 	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+	
+	
 	
 	
 }
