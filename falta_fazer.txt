@@ -1,0 +1,20 @@
+FALTA FAZER:
+-Classe Main;
+-...
+
+FAZENDO:
+-ANDRÉ:
+  •...
+-CÉSAR:
+  •...
+-LEONARDO:
+  •...
+-LUCAS:
+  •classe Usuario;
+  •classe Item;
+  •classe Caixa.
+  
+FEITO:
+  -enum Estados;
+  -enum Sexo;
+  -?
