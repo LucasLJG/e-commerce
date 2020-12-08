@@ -69,7 +69,7 @@ public class Perfil {
 		String out = "Sexo: " + getSexo() + "\n";
 		out = out + "Data de nascimento: " + dataNascimento.get(Calendar.DAY_OF_MONTH) + "/" + dataNascimento.get(Calendar.MONTH)+"/" + dataNascimento.get(Calendar.YEAR) + "\n";
 		out = out + "CPF: " + "getCpf() + "\n";
-		out = out  + "Telefone: " + getTelefone() + "\n";
+		out = out + "Telefone: " + getTelefone() + "\n";
 		out = out + "Cidade: " + getCidade() + "\n";
 		out = out + "Estado: " + getEstado() + "\n";
 		return out;
