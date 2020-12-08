@@ -73,6 +73,6 @@ public class Perfil {
 		out = out + "Cidade: " + getCidade() + "\n";
 		out = out + "Estado: " + getEstado() + "\n";
 		return out;
-	
+		
 	
 }
