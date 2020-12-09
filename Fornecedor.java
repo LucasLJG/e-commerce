@@ -36,12 +36,21 @@ public class Fornecedor {
 		this.quantidadeDisponivel = quantidadeDisponivel;
 	}
 
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	
+	public String toString() {
+		String out = "";
+		out = out + "Nome do Fornecedor: " + getNome() + "\n";
+		out = out + "Código: " + getCodigo() + "\n";
+		out = out + "Quantidade Disponível: " + getQuantidadeDisponivel() + "\n";
+		out = out + "Status:" + getStatus() + "\n";
+		return out;
 	}
 	
 	

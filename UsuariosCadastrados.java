@@ -2,32 +2,30 @@ import java.util.ArrayList;
 
 public class UsuariosCadastrados {
 	private ArrayList<Usuario> usuariosCadastrados;
-	private ArrayList<Usuario> usuariosAtivos;
-	private ArrayList<Usuario> usuariosInativos;
-	private static int quantidadeUsuarios = 0;
 	
 	public UsuariosCadastrados() {
 		usuariosCadastrados = new ArrayList<Usuario>();
-		usuariosAtivos = new ArrayList<Usuario>();
-		usuariosInativos = new ArrayList<Usuario>();
 	}
 
 	public ArrayList<Usuario> getUsuariosCadastrados() {
 		return usuariosCadastrados;
 	}
-
-	public ArrayList<Usuario> getUsuariosAtivos() {
-		return usuariosAtivos;
-	}
-
-	public ArrayList<Usuario> getUsuariosInativos() {
-		return usuariosInativos;
-	}
-
-	public static int getQuantidadeUsuarios() {
-		return quantidadeUsuarios;
-	}
 	
-	
+	@Override
+	public String toString() {
+		if (this.getUsuariosCadastrados().isEmpty()) {
+			String out = "Não há usuários cadastrados na plataforma \n";
+			return out; 
+		}
+		else {
+			String out = "";
+			int i = 1;
+			out = out + "Usuários cadastrados: ";
+			for (Usuario usuario_atual: this.getUsuariosCadastrados()) {
+				out = out + "Usuário" + i + usuario_atual.getNome() + "\n";
+			}
+			return out;
+		}
+	}
 	
 }
