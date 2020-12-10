@@ -4,12 +4,10 @@ import java.util.Scanner;
 public class Caixa {
 	// Atributos das Classes
 	private int codigo;
-	private ArrayList<Usuario> usuarios;
 	private boolean status;
 	
 	// Contrutor da classe.
 	public Caixa(int codigo, boolean status) {
-		usuarios = new ArrayList<Usuario>();
 		this.codigo = codigo;
 		this.status = status;
 	}
@@ -20,14 +18,6 @@ public class Caixa {
 	}
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
-	}
-	
-	// Metodos para acessar e modificar o atributo Usuario.
-	public ArrayList<Usuario> getUsuario() {
-		return usuarios;
-	}
-	public void setUsuario(ArrayList<Usuario> usuario) {
-		this.usuarios = usuario;
 	}
 	
 	//Metodos para acessar e modificar o atributo Status.
@@ -104,12 +94,6 @@ public class Caixa {
 	public String ToString() {
 		String geral = "Informacoes do Caixa.";
 		geral += "Codigo:" + this.getCodigo() + "\n";
-		geral += "Usuarios:";
-		for (Usuario usuario: this.usuarios)
-		{
-			geral += usuario.getNome();
-		}
-		geral += "\n";
 		geral += "Status:" + this.getStatus() + "\n";
 		return geral;
 	}
