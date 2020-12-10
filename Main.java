@@ -74,9 +74,9 @@ public class Main {
 			pedido2_user1.getItem().add(caneta);
 			pedido2_user1.getItem().add(caderno);
 			
-			System.out.printf("\n\nDados de %s\n", admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).getNome());
-			System.out.println(admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0));
-			System.out.println(admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).getPerfil());
+			System.out.printf("\n\nDados de %s\n", user1.getNome());
+			System.out.println(user1);
+			System.out.println(perfil_user1);
 		}
 		else {
 			System.out.println("Usuario nao deseja se cadastrar\n");
