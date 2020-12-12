@@ -1,3 +1,4 @@
+package parte01;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Usuario {
@@ -114,6 +115,19 @@ public class Usuario {
 		else {
 			System.out.println("Usuário não cadastrado");
 		}
+	}
+	/* Essa funcao adiciona um item na lista de item de cada pedido. Para isso, ela acessa o pedido e
+	 * adiciona o item e, em seguida, atualiza os dados do item.
+	 */
+	public void adicionaItem (Item item, Pedido pedido, int quantidade) {
+		if (item.getEstoqueDisponivel() < quantidade) {
+			System.out.println("Nao possuimos estoque suficiente para esse item");
+		}
+		else {
+			item.setQuantidade(quantidade);
+			item.setEstoqueDisponivel(item.getEstoqueDisponivel() - quantidade);
+			pedido.getItem().add(item);
+		} 
 	}
 	
 	@Override
