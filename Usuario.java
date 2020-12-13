@@ -1,4 +1,3 @@
-package parte01;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Usuario {
@@ -144,8 +143,7 @@ public class Usuario {
 			for (Pedido pedido_atual: getPedidos()) {
 				for (int i = 0; i < pedido_atual.getItem().size(); i++) {
 					String nome = pedido_atual.getItem().get(i).getNome();
-					out = out + "Item" + j + "\n";
-					out = out + "Nome: " + nome + "\n";
+					out = out + "Item " + j + ": " + nome + "\n";
 					j++;
 				}
 			}

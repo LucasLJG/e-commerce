@@ -1,16 +1,17 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Pedido {
 	private int codigo;
 	private String nomeVendedor;
-	private Data dia;
+	private Calendar dataPedido;
 	private ArrayList<Item> item;
 	private boolean status;
 	
-	public Pedido(int codigo, String nomeVendedor, Data dia, boolean status) {
+	public Pedido(int codigo, String nomeVendedor, Calendar dataPedido, boolean status) {
 		this.codigo = codigo;
 		this.nomeVendedor = nomeVendedor;
-		this.dia = dia;
+		this.dataPedido = dataPedido;
 		this.status = status;
 		item = new ArrayList<Item>();
 	}
@@ -31,12 +32,12 @@ public class Pedido {
 		this.nomeVendedor = nomeVendedor;
 	}
 
-	public Data getDia() {
-		return dia;
+	public Calendar getDataPedido() {
+		return dataPedido;
 	}
 
-	public void setDia(Data dia) {
-		this.dia = dia;
+	public void setDataPedido(Calendar dataPedido) {
+		this.dataPedido = dataPedido;
 	}
 
 	public ArrayList<Item> getItem() {
@@ -69,8 +70,7 @@ public class Pedido {
 				int k = 1;
 				out = out + "Itens do Pedido: ";
 				for (Item item_atual: this.getItem()) {
-					out = out + "Item " + k + "\n";
-					out = out + "Nome: " + item_atual.getNome() + "\n";
+					out = out + "Item: " + k + item_atual.getNome() + "\n";
 					k++;
 				}
 				return out;

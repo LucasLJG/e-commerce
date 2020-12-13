@@ -9,7 +9,7 @@ public class Item {
 	private boolean status;
 	private ArrayList<Fornecedor> fornecedores;
 	
-	public Item(String nome, int codigo, int quantidade, int precoUnitario, int estoqueDisponivel, boolean status) {
+	public Item(String nome, int codigo, int quantidade, float precoUnitario, int estoqueDisponivel, boolean status, Fornecedor fornecedor, ArrayList<Item> lista_itens) {
 		this.nome = nome;
 		this.codigo = codigo;
 		this.quantidade = quantidade;
@@ -17,6 +17,8 @@ public class Item {
 		this.estoqueDisponivel = estoqueDisponivel;
 		this.status = status;
 		fornecedores = new ArrayList<Fornecedor>();
+		fornecedores.add(fornecedor);
+		lista_itens.add(this);
 	}
 	
 	public String getNome() {
@@ -71,31 +73,33 @@ public class Item {
 		return fornecedores;
 	}
 	
-	public void reposicao_estoque(ArrayList<Fornecedor> fornecedores) { // repoe o estoque para 50 itens
-		int i = 0;
-		while (fornecedores.isEmpty() != true) {
-			if (fornecedores.get(i).getQuantidadeDisponivel() != 0) {
-				this.setEstoqueDisponivel(this.getEstoqueDisponivel() + fornecedores.get(i).getQuantidadeDisponivel());
-				fornecedores.get(i).setQuantidadeDisponivel(0);
-				if (this.getEstoqueDisponivel() > 50) {
-					break;
-				}
-			}
-			i++;
+	public static void listar_catalogo(ArrayList<Item> lista_itens) {
+		System.out.println("\nLista de produtos: ");	
+		for(int i = 0; i < lista_itens.size(); i++) {
+			System.out.println(i + "-" + lista_itens.get(i).getNome() + " - " + "pre�o: " + lista_itens.get(i).getPrecoUnitario() + 
+					" - " + "quantidade: " + lista_itens.get(i).getEstoqueDisponivel());	
 		}
 	}
+	
+	
+	public void reposicao_estoque() { // rep�em o estoque quando restar 50 unidades
+		if(this.getEstoqueDisponivel() < 50) {
+			this.setEstoqueDisponivel(fornecedores.get(0).getQuantidadeDisponivel());
+		}
+	}
+
 	
 	@Override
 	public String toString() {
 		String out = "";
 		out = out + "Nome do Item: " + getNome() + "\n";
-		out = out + "Código: " + getCodigo() + "\n";
+		out = out + "Codigo: " + getCodigo() + "\n";
 		out = out + "Quantidade: " + getQuantidade() + "\n";
-		out = out + "Preço Unitário: " + getPrecoUnitario() + "\n";
-		out = out + "Estoque Disponível: " + getEstoqueDisponivel() + "\n";
+		out = out + "Preco Unitário: " + getPrecoUnitario() + "\n";
+		out = out + "Estoque Disponivel: " + getEstoqueDisponivel() + "\n";
 		out = out + "Status: " + getStatus() + "\n";
 		if (this.getFornecedores().isEmpty()) {
-			out = out + "Os fornecedores estão temporariamente indisponíveis para esse item";
+			out = out + "Os fornecedores estao temporariamente indisponiveis para esse item";
 		}
 		else {
 			int j = 1;

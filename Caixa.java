@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,9 +37,9 @@ public class Caixa {
 	 * calcular o preco total da atual pedido. Depois armazena esse valor em um novo array (precos) na mesma posicao do
 	 * pedido atual. A funcao retorna a variavel armagenadora.
 	 */
-	public ArrayList<Double> pagamentoVista (Usuario cliente) {
+	public ArrayList<BigDecimal> pagamentoVista (Usuario cliente) {
 		ArrayList<Pedido> pedidos  = cliente.getPedidos(); 
-		ArrayList<Double> precos = new ArrayList<Double>();
+		ArrayList<BigDecimal> precos = new ArrayList<BigDecimal>();
 		double preco = 0;
 		// Percorrendo o array pedidos e itens.
 		for (Pedido pedido: pedidos) {
@@ -47,7 +49,8 @@ public class Caixa {
 			}
 			// Aplicando o desconto e armazenando.
 			preco = preco * 0.95;
-			precos.add(preco);
+			BigDecimal preco_corrigido = new BigDecimal(preco).setScale(2, RoundingMode.HALF_EVEN);
+			precos.add(preco_corrigido);
 		}
 		return precos;
 	}
@@ -61,16 +64,17 @@ public class Caixa {
 	 * Por fim, armazena esse valor em um novo array (precos) na mesma posicao dopedido atual. 
 	 * A funcao retorna a variavel armagenadora sendo a ultima posicao o numero de parcelas.
 	 */
-	public ArrayList<Double> pagamentoParcelado (Usuario cliente) {
+	public ArrayList<BigDecimal> pagamentoParcelado (Usuario cliente) {
 		double parcelas;
 		double preco = 0;		
 		ArrayList<Pedido> pedidos  = cliente.getPedidos();
-		ArrayList<Double> precos = new ArrayList<Double>();
+		ArrayList<BigDecimal> precos = new ArrayList<BigDecimal>();
 		// Perguntando o numero de parcelas.
 		Scanner ler = new Scanner(System.in);
 		System.out.println("Escolha o numero de parcelas entre as opcoes abaixo digitando o numero entre []:");
 		System.out.println("[1]: 3 parcelas\n[2]: 6 parcelas\n[3]: 9 parcelas\n[4]: 12 parcelas");
 		int tipo = ler.nextInt();
+		ler.close();
 		if (tipo == 1) parcelas = 3;
 		else if (tipo == 2) parcelas = 6;
 		else if (tipo == 3) parcelas = 9;
@@ -84,9 +88,13 @@ public class Caixa {
 			}
 			// Calculando o valor de parcelas e armazenando.
 			preco = preco / parcelas;
-			precos.add(preco);
+			BigDecimal preco_corrigido = new BigDecimal(preco).setScale(2, RoundingMode.HALF_EVEN);
+
+			precos.add(preco_corrigido);
+			
 		}
-		precos.add(parcelas);
+		BigDecimal parcelas_corrigidas = new BigDecimal(parcelas).setScale(0, RoundingMode.HALF_EVEN);
+		precos.add(parcelas_corrigidas);
 		return precos;
 	}
 	
