@@ -37,7 +37,7 @@ public class Caixa {
 	 * calcular o preco total da atual pedido. Depois armazena esse valor em um novo array (precos) na mesma posicao do
 	 * pedido atual. A funcao retorna a variavel armagenadora.
 	 */
-	public ArrayList<BigDecimal> pagamentoVista (Usuario cliente) {
+	public void pagamentoVista (Usuario cliente) {
 		ArrayList<Pedido> pedidos  = cliente.getPedidos(); 
 		ArrayList<BigDecimal> precos = new ArrayList<BigDecimal>();
 		double preco = 0;
@@ -52,7 +52,10 @@ public class Caixa {
 			BigDecimal preco_corrigido = new BigDecimal(preco).setScale(2, RoundingMode.HALF_EVEN);
 			precos.add(preco_corrigido);
 		}
-		return precos;
+		System.out.println("Desconto de 5% no valor total dos pedidos.");
+		for (int i = 0; i < precos.size(); i++) {
+			System.out.println("Pedido " + (i+1) + ": " + precos.get(i));
+		}
 	}
 	
 	/* 

@@ -132,7 +132,6 @@ public class Usuario {
 	@Override
 	public String toString() {
 		String out = "";
-		out = out + "Identificacao do usuario: " + getIdentificador() + "\n";
 		out = out + "Nome: " + getNome() + "\n";
 		if (this.pedidos.isEmpty()) {
 			out = out + "O usuario nao tem pedidos realizados.\n";

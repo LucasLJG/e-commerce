@@ -42,6 +42,7 @@ public class Main {
 		
 		Perfil perfil_admin1 = new Perfil(Sexo.HOMEM, new GregorianCalendar(2020, 12, 8), Estado.MINAS_GERAIS.getCapital(), Estado.MINAS_GERAIS, "15 88888-8888", "123XXXXXXXXX/89");
 		Administrador admin1 = new Administrador(2, "Rafael Santos", "rafael_santos@gmail.com", "12345678", perfil_admin1, true);
+		admin1.criarCadastro(admin1);
 		
 		
 		System.out.println("Bem vindo. Gostaria de se cadastrar? (S/N)");
@@ -93,8 +94,8 @@ public class Main {
 			System.out.printf("\n\nDados de %s\n", user1.getNome());
 			System.out.println(user1);
 			System.out.println(perfil_user1);
-			System.out.println("Pre�o a vista: " + total.pagamentoVista(user1) + "\n");
-			System.out.println("\nPre�o parcelado: " + total.pagamentoParcelado(user1));
+			//System.out.println("Preco a vista: " + total.pagamentoVista(user1) + "\n");
+			//System.out.println("\nPreco parcelado: " + total.pagamentoParcelado(user1));
 			
 			System.out.println("\n****************************************************************************");
 			
@@ -125,25 +126,38 @@ public class Main {
 			
 			Caixa total_user2 = new Caixa(1, true);
 			
-			System.out.printf("Dados de %s\n", user2.getNome());
+			System.out.printf("Dados de Usuario: \n");
 			System.out.println(user2);
+			System.out.println("Dados de perfil do Usuario: ");
 			System.out.println(perfil_user2);
 						
-			
-			System.out.println("Preco a vista: " + total_user2.pagamentoVista(user2) + "\n");
-			System.out.println("\nPreco parcelado: " + total_user2.pagamentoParcelado(user2));
+			System.out.println("****************************************************************************");
+			System.out.println("Qual a forma de pagamento ? \n1 - Pagamento a vista \n2 - Pagamento parcelado");
+			Scanner formaPagamento = new Scanner(System.in);
+			int opcaoPagamento = formaPagamento.nextInt();
+			while (opcaoPagamento != 1  && opcaoPagamento != 2) {
+				System.out.println("Entrada invalida, Digite 1 ou 2 para acessar sua opcao. \n");
+				System.out.println("Qual a forma de pagamento ? \n1 - Pagamento a vista \n2 - Pagamento parcelado");
+				opcaoPagamento = formaPagamento.nextInt();
+			}
+			if (opcaoPagamento == 1) {
+				System.out.println("Pagamento a vista: ");
+				total_user2.pagamentoVista(user2);
+			}
+			else {
+				System.out.println("Pagamento parcelado: ");
+				total_user2.pagamentoParcelado(user2);
+			}
+			formaPagamento.close();
 			
 			System.out.println("\n****************************************************************************\n");
 			
 			//remover usuario
+			System.out.println("O " + admin1.getNome() + " removeu o usuario: " + user2.getNome());
 			admin1.removerCadastro(user2);
 			
-			//lista de usuarios
+			//lista de usuarios cadastrados
 			System.out.println(admin1.getCadastroUsuarios() + "\n");
-			
-			
-			//alterar senha
-			user2.alterar_senha("giovanna.nogueira@email.com", "giovanna1234");
 
 			leitor.close();
 

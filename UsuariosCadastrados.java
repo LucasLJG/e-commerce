@@ -20,9 +20,9 @@ public class UsuariosCadastrados {
 		else {
 			String out = "";
 			int i = 1;
-			out = out + "Usuários cadastrados: ";
+			out = out + "Usuários cadastrados: \n";
 			for (Usuario usuario_atual: this.getUsuariosCadastrados()) {
-				out = out + "Usuário" + i + usuario_atual.getNome() + "\n";
+				out = out + "Usuário " + i + ": " + usuario_atual.getNome() + " \n";
 			}
 			return out;
 		}
