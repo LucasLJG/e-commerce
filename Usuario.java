@@ -132,18 +132,21 @@ public class Usuario {
 	@Override
 	public String toString() {
 		String out = "";
-		out = out + "Nome: " + getNome() + "\n";
-		if (this.pedidos.isEmpty()) {
+		out = out + "Nome: " + this.getNome() + "\n";
+		if (this.getPedidos().isEmpty()) {
 			out = out + "O usuario nao tem pedidos realizados.\n";
 		}
 		else {
 			out = out + "Pedido do Usuario: \n";
-			int j = 1;
-			for (Pedido pedido_atual: getPedidos()) {
-				for (int i = 0; i < pedido_atual.getItem().size(); i++) {
-					String nome = pedido_atual.getItem().get(i).getNome();
-					out = out + "Item " + j + ": " + nome + "\n";
-					j++;
+			for (int i = 0; i < this.getPedidos().size(); i++) {
+				for (int k = 0; k < this.getPedidos().get(i).getItem().size(); k++) {
+					if (this.getPedidos().get(i).getItem().isEmpty()) {
+						out = out + "Pedido " + (i+1) + ": sem itens comprados";
+					}
+					else {
+						String nome = this.getPedidos().get(i).getItem().get(k).getNome();
+						out = out + "Item " + (k+1) + ": " + nome + "\n";
+					}
 				}
 			}
 		}

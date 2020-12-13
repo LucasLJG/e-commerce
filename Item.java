@@ -76,13 +76,12 @@ public class Item {
 	public static void listar_catalogo(ArrayList<Item> lista_itens) {
 		System.out.println("\nLista de produtos: ");	
 		for(int i = 0; i < lista_itens.size(); i++) {
-			System.out.println(i + "-" + lista_itens.get(i).getNome() + " - " + "preço: " + lista_itens.get(i).getPrecoUnitario() + 
+			System.out.println(i + "-" + lista_itens.get(i).getNome() + " - " + "preco: R$: " + lista_itens.get(i).getPrecoUnitario() + 
 					" - " + "quantidade: " + lista_itens.get(i).getEstoqueDisponivel());	
 		}
 	}
 	
-	
-	public void reposicao_estoque() { // repõem o estoque quando restar 50 unidades
+	public void reposicao_estoque() { // repï¿½em o estoque quando restar 50 unidades
 		if(this.getEstoqueDisponivel() < 50) {
 			this.setEstoqueDisponivel(fornecedores.get(0).getQuantidadeDisponivel());
 		}

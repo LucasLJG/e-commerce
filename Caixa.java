@@ -52,9 +52,9 @@ public class Caixa {
 			BigDecimal preco_corrigido = new BigDecimal(preco).setScale(2, RoundingMode.HALF_EVEN);
 			precos.add(preco_corrigido);
 		}
-		System.out.println("Desconto de 5% no valor total dos pedidos.");
+		System.out.println("Pagamento a vista: desconto de 5% no valor total dos pedidos. ");
 		for (int i = 0; i < precos.size(); i++) {
-			System.out.println("Pedido " + (i+1) + ": " + precos.get(i));
+			System.out.println("Pedido " + (i+1) + ": R$: " + precos.get(i));
 		}
 	}
 	
@@ -76,12 +76,18 @@ public class Caixa {
 		Scanner ler = new Scanner(System.in);
 		System.out.println("Escolha o numero de parcelas entre as opcoes abaixo digitando o numero entre []:");
 		System.out.println("[1]: 3 parcelas\n[2]: 6 parcelas\n[3]: 9 parcelas\n[4]: 12 parcelas");
-		int tipo = ler.nextInt();
+		String tipo = ler.nextLine();
+		while (tipo.contains("1") == false  && tipo.contains("2") == false && tipo.contains("3") == false && tipo.contains("4") == false) {
+			System.out.println("Opção inválida.");
+			System.out.println("Escolha o numero de parcelas entre as opcoes abaixo digitando o numero entre []:");
+			System.out.println("[1]: 3 parcelas\n[2]: 6 parcelas\n[3]: 9 parcelas\n[4]: 12 parcelas");
+			tipo = ler.nextLine();
+		}
 		ler.close();
-		if (tipo == 1) parcelas = 3;
-		else if (tipo == 2) parcelas = 6;
-		else if (tipo == 3) parcelas = 9;
-		else if (tipo == 4) parcelas = 12;
+		if (tipo.contains("1")) parcelas = 3;
+		else if (tipo.contains("2")) parcelas = 6;
+		else if (tipo.contains("3")) parcelas = 9;
+		else if (tipo.contains("4")) parcelas = 12;
 		else parcelas = 1;
 		// Percorrendo o array pedidos e itens.
 		for (Pedido pedido: pedidos) {
@@ -98,6 +104,10 @@ public class Caixa {
 		}
 		BigDecimal parcelas_corrigidas = new BigDecimal(parcelas).setScale(0, RoundingMode.HALF_EVEN);
 		precos.add(parcelas_corrigidas);
+		System.out.println("Pagamento parcelado, sem cobrança de juros. Os valores das parcelas de cada pedido conforme a sua escolha. ");
+		for (int j = 0; j < precos.size(); j++) {
+			System.out.println("Pedido " + (j+1) + ": " + "\n" + "Parcelado em " + parcelas + " vezes: Valor de cada parcela: R$: " + precos.get(j));
+		}
 		return precos;
 	}
 	

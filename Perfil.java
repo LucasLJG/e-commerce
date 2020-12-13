@@ -67,12 +67,12 @@ public class Perfil {
 	
 	@Override
 	public String toString() {
-		String out = "Sexo: " + getSexo() + "\n";
+		String out = "Sexo: " + getSexo().getDescricao() + "\n";
 		out = out + "Data de nascimento: " + dataNascimento.get(Calendar.DAY_OF_MONTH) + "/" + dataNascimento.get(Calendar.MONTH)+"/" + dataNascimento.get(Calendar.YEAR) + "\n";
 		out = out + "CPF: " + getCpf() + "\n";
 		out = out + "Telefone: " + getTelefone() + "\n";
 		out = out + "Cidade: " + getCidade() + "\n";
-		out = out + "Estado: " + getEstado() + "\n";
+		out = out + "Estado: " + getEstado().getNome() + "\n";
 		return out;
 	}
 }
