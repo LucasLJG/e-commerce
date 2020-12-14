@@ -99,12 +99,47 @@ public class Main {
 				while(compras.equals("S")) {
 					
 					System.out.println("Selecione o produto");
-					int mercadoria = Integer.parseInt(leitor.nextLine());
-					while(mercadoria > lista_itens.size()-1) {
-						System.out.println("Entrada invalida.Selecione o produto");
-						mercadoria = Integer.parseInt(leitor.nextLine());					
+					String opcao_mercadoria;
+					opcao_mercadoria = leitor.nextLine();
+					boolean condicao = true;
+					while (condicao) {
+						switch(opcao_mercadoria) {
+						case "0":
+							condicao = false;
+							break;
+						case "1":
+							condicao = false;
+							break;
+						case "2":
+							condicao = false;
+							break;
+						case "3":
+							condicao = false;
+							break;
+						case "4":
+							condicao = false;
+							break;
+						case "5":
+							condicao = false;
+							break;
+						case "6":
+							condicao = false;
+							break;
+						case "7":
+							condicao = false;
+							break;
+						case "8":
+							condicao = false;
+							break;
+						default:
+							System.out.println("Opção inválida. Digite um número no intervalo [0,8] para escolher seu produto: ");
+							opcao_mercadoria = leitor.nextLine();
+						}
 					}
+			
+					int mercadoria = Integer.parseInt(opcao_mercadoria);
 					System.out.println("Selecione a quantidade");
+					
 					int quantidade = Integer.parseInt(leitor.nextLine());
 					while(quantidade > lista_itens.get(mercadoria).getEstoqueDisponivel()) {
 						System.out.println("Entrada invalida. Selecione a quantidade");
@@ -181,20 +216,52 @@ public class Main {
 				while(compras.equals("S")) {
 					
 					System.out.println("Selecione o produto");
-					int mercadoria = Integer.parseInt(leitor.nextLine());
-					while(mercadoria > lista_itens.size()-1) {
-						System.out.println("Entrada invalida.Selecione o produto");
-						mercadoria = Integer.parseInt(leitor.nextLine());					
+					String opcao_mercadoria;
+					opcao_mercadoria = leitor.nextLine();
+					boolean condicao = true;
+					while (condicao) {
+						switch(opcao_mercadoria) {
+						case "0":
+							condicao = false;
+							break;
+						case "1":
+							condicao = false;
+							break;
+						case "2":
+							condicao = false;
+							break;
+						case "3":
+							condicao = false;
+							break;
+						case "4":
+							condicao = false;
+							break;
+						case "5":
+							condicao = false;
+							break;
+						case "6":
+							condicao = false;
+							break;
+						case "7":
+							condicao = false;
+							break;
+						case "8":
+							condicao = false;
+							break;
+						default:
+							System.out.println("Opção inválida. Digite um número no intervalo [0,8] para escolher seu produto: ");
+							opcao_mercadoria = leitor.nextLine();
+						}
 					}
+			
+					int mercadoria = Integer.parseInt(opcao_mercadoria);
 					System.out.println("Selecione a quantidade");
 					int quantidade = Integer.parseInt(leitor.nextLine());
 					while(quantidade > lista_itens.get(mercadoria).getEstoqueDisponivel()) {
 						System.out.println("Entrada invalida. Selecione a quantidade");
 						quantidade = Integer.parseInt(leitor.nextLine());
 					}
-					
-
-					
+						
 					//instanciacao de um novo item baseado no produto escolhido
 					Item auxiliar = new Item(lista_itens.get(mercadoria).getNome(), lista_itens.get(mercadoria).getCodigo(), 
 							lista_itens.get(mercadoria).getQuantidade(), lista_itens.get(mercadoria).getPrecoUnitario(), 
@@ -252,28 +319,13 @@ public class Main {
 			}
 		}
 		
-		System.out.println("\n****************************************************************************");
+		System.out.println("****************************************************************************");
 			
 		//lista de usuarios cadastrados
-		System.out.println(admin1.getCadastroUsuarios());
-
+		System.out.println(admin1.getCadastroUsuarios());	
 		
-		System.out.println("Operacao finalizada com sucesso.\n");
-		
-		
-		System.out.println("\n****************************************************************************\n");
-		if(admin1.getCadastroUsuarios().getUsuariosCadastrados().isEmpty() == false) {
-			admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).alterar_senha
-			(admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).getEmail(), 
-					admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).getSenha());
-		}
-		
-		if(admin1.getCadastroUsuarios().getUsuariosCadastrados().isEmpty() == false) {
-			admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).recuperar_senha(
-					admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).getEmail());
-			
-		}
-		
+		System.out.println("****************************************************************************\n");
+		System.out.println("Operação finalizada. \n");
 		
 		leitor.close();
 		

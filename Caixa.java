@@ -38,7 +38,6 @@ public class Caixa {
 	 * pedido atual. A funcao retorna a variavel armagenadora.
 	 */
 	public void pagamentoVista (Usuario cliente) {
-		System.out.println("teste " + cliente.getPedidos().get(0).getItem().size());
 		
 		ArrayList<Pedido> pedidos  = cliente.getPedidos(); 
 		ArrayList<BigDecimal> precos = new ArrayList<BigDecimal>();
@@ -82,7 +81,7 @@ public class Caixa {
 		System.out.println("[1]: 3 parcelas\n[2]: 6 parcelas\n[3]: 9 parcelas\n[4]: 12 parcelas");
 		String tipo = ler.nextLine();
 		while (tipo.contains("1") == false  && tipo.contains("2") == false && tipo.contains("3") == false && tipo.contains("4") == false) {
-			System.out.println("Opção inválida.");
+			System.out.println("Opcao invalida.");
 			System.out.println("Escolha o numero de parcelas entre as opcoes abaixo digitando o numero entre []:");
 			System.out.println("[1]: 3 parcelas\n[2]: 6 parcelas\n[3]: 9 parcelas\n[4]: 12 parcelas");
 			tipo = ler.nextLine();
@@ -109,11 +108,11 @@ public class Caixa {
 		
 		BigDecimal parcelas_corrigidas = new BigDecimal(parcelas).setScale(0, RoundingMode.HALF_EVEN);
 		precos.add(parcelas_corrigidas);
-		System.out.println("Pagamento parcelado, sem cobrança de juros. Os valores das parcelas de cada pedido conforme a sua escolha. ");
+		System.out.println("Pagamento parcelado, sem cobranï¿½a de juros. Os valores das parcelas de cada pedido conforme a sua escolha. ");
 		for (int j = 0; j < precos.size() - 1; j++) {
 			System.out.println("Pedido " + (j+1) + ": " + "\n" + "Parcelado em " + parcelas_corrigidas + " vezes: Valor de cada parcela: R$: " + precos.get(j));
 		}
-		
+		ler.close();
 		return precos;
 	}
 	

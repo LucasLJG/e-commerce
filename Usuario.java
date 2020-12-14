@@ -73,27 +73,27 @@ public class Usuario {
 	
 	public void recuperar_senha(String email) {
 		
-		if(status == true) {
+		if(this.getStatus() == true) {
 		
-			if (this.email == email) {
+			if (this.getEmail() == email) {
 				System.out.println("Digite o numero do seu cpf para confirmacao de autenticidade: \n");
 				Scanner dados = new Scanner(System.in);
 				String entrada = dados.nextLine();
 				dados.close();
-				if (this.perfil.getCpf().equals(entrada) == true) {
+				if (this.getPerfil().getCpf().equals(entrada) == true) {
 					System.out.println("Senha: ");
 					System.out.println(this.getSenha());
 				}
 				else {
-					System.out.println("Numero de CPF invalido.\n");
+					System.out.println("Numero de CPF invalido. \n");
 				}
 			}
 			else{
-				System.out.println("Endereco de e-mail invalido.\n");
+				System.out.println("Endereco de e-mail invalido. \n");
 			}
 		}
 		else {
-			System.out.println("Usuario nao cadastrado.\n");
+			System.out.println("Usuario desativado. \n");
 		}
 	}
 	
@@ -102,18 +102,29 @@ public class Usuario {
 		if(status == true) {
 			
 			if (this.getEmail().equals(email)== true && this.getSenha().equals(senha) == true) {
-				System.out.printf("Digite a nova senha de %s: \n", this.getNome());
-				Scanner senha_nova = new Scanner(System.in);
-				String senha_atual = senha_nova.nextLine();
-				this.setSenha(senha_atual);
-				System.out.println("Senha alterada com sucesso.\n");
+				System.out.println("Como medida adicional de segurança, por favor digite o número de seu CPF no formato (YYYXXX/ZA): ");
+				Scanner cpf_usuario = new Scanner(System.in);
+				String cpf_paraValidar = cpf_usuario.nextLine();
+				cpf_usuario.close();
+				if (this.getPerfil().getCpf().equals(cpf_paraValidar)) {
+					System.out.println("CPF validado com sucesso. \n");
+					System.out.printf("Digite a nova senha de %s: \n", this.getNome());
+					Scanner senha_nova = new Scanner(System.in);
+					String senha_atual = senha_nova.nextLine();
+					this.setSenha(senha_atual);
+					System.out.println("Senha alterada com sucesso. \n");
+					senha_nova.close();
+				}
+				else {
+					System.out.println("CPF invalido. \n");
+				}
 			}
 			else {
-				System.out.println("Dados invalidos.\n");
+				System.out.println("Dados invalidos. \n");
 			}
 		}
 		else {
-			System.out.println("Usuario nao cadastrado");
+			System.out.println("Usuario desativado. \n");
 		}
 	}
 	/* Essa funcao adiciona um item na lista de item de cada pedido. Para isso, ela acessa o pedido e
@@ -136,7 +147,7 @@ public class Usuario {
 		out = out + "Identificacao do usuario: " + getIdentificador() + "\n";
 		out = out + "Nome: " + getNome() + "\n";
 		if (this.getPedidos().get(0).getItem().isEmpty()) {
-			out = out + "Pedido do Usuario: \n";
+			out = out + "Pedido do Usuario: ";
 			out = out + "O usuario nao tem pedidos realizados.\n";
 		}
 		else {
