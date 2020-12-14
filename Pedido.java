@@ -52,6 +52,19 @@ public class Pedido {
 		this.status = status;
 	}
 	
+	public static boolean ehInteiro(String quantidade) {
+		char[] array_char = quantidade.toCharArray();
+		boolean ehInteiro = true;
+		
+		for(int i = 0; i < array_char.length; i++) {
+			if(!Character.isDigit(array_char[i])) {
+				ehInteiro = false;
+				break;
+			}
+		}
+		return ehInteiro;
+	}
+	
 	@Override
 	public String toString() {
 		if (this.getItem().isEmpty()) {

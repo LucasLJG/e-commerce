@@ -102,7 +102,7 @@ public class Usuario {
 		if(status == true) {
 			
 			if (this.getEmail().equals(email)== true && this.getSenha().equals(senha) == true) {
-				System.out.println("Como medida adicional de segurança, por favor digite o número de seu CPF no formato (YYYXXX/ZA): ");
+				System.out.println("Como medida adicional de seguranca, por favor digite o numero de seu CPF no formato (YYYXXX/ZA): ");
 				Scanner cpf_usuario = new Scanner(System.in);
 				String cpf_paraValidar = cpf_usuario.nextLine();
 				cpf_usuario.close();
@@ -131,14 +131,21 @@ public class Usuario {
 	 * adiciona o item e, em seguida, atualiza os dados do item.
 	 */
 	public void adicionaItem (Item item, Pedido pedido, int quantidade) {
-		if (item.getEstoqueDisponivel() < quantidade) {
-			System.out.println("Nao possuimos estoque suficiente para esse item");
+		while(item.getEstoqueDisponivel() < quantidade) {
+			System.out.println("Nao possuimos estoque suficiente desse item.\nSelecione a quantidade");
+			Scanner ler = new Scanner(System.in);
+			String auxiliar;
+			auxiliar = ler.nextLine();
+			while(Pedido.ehInteiro(auxiliar) == false) {
+				System.out.println("Entrada invalida. Selecione a quantidade");
+				auxiliar = ler.nextLine();
+			}
+			quantidade = Integer.parseInt(auxiliar);
 		}
-		else {
-			item.setQuantidade(quantidade);
-			item.setEstoqueDisponivel(item.getEstoqueDisponivel() - quantidade);
-			pedido.getItem().add(item);
-		} 
+		
+		item.setQuantidade(quantidade);
+		item.setEstoqueDisponivel(item.getEstoqueDisponivel() - quantidade);
+		pedido.getItem().add(item);
 	}
 	
 	@Override
@@ -156,8 +163,10 @@ public class Usuario {
 			for (Pedido pedido_atual: getPedidos()) {
 				for (int i = 0; i < pedido_atual.getItem().size(); i++) {
 					String nome = pedido_atual.getItem().get(i).getNome();
+					int quantidade = pedido_atual.getItem().get(i).getQuantidade();
 					out = out + "Item" + j + "\n";
-					out = out + "Nome: " + nome + "\n";
+					out = out + "Nome:" + nome + "; " ;
+					out = out + "Quantidade: " + quantidade + "\n"; 
 					j++;
 				}
 			}
