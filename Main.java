@@ -45,9 +45,16 @@ public class Main {
 		
 
 		
-		Perfil perfil_admin1 = new Perfil(Sexo.HOMEM, new GregorianCalendar(2020, 12, 8), Estado.MINAS_GERAIS.getCapital(), Estado.MINAS_GERAIS, "15 88888-8888", "123XXXXXXXXX/89");
+		Perfil perfil_admin1 = new Perfil(Sexo.HOMEM, new GregorianCalendar(1989, 11, 8), Estado.MINAS_GERAIS.getCapital(), Estado.MINAS_GERAIS, "15 88888-8888", "123XXXXXXXXX/89");
 		Administrador admin1 = new Administrador(identificador_usuario, "Rafael Santos", "rafael_santos@gmail.com", "12345678", perfil_admin1, true);
-		admin1.criarCadastro(admin1);
+		admin1.inicializar_sistema(admin1);
+		
+		identificador_pedido++;
+		
+		Perfil perfil_admin2 = new Perfil(Sexo.MULHER, new GregorianCalendar(1987, 12, 10), Estado.SAO_PAULO.getCapital(), Estado.SAO_PAULO, "11 77785-9847", "456XXXXXXXXX/47");
+		Administrador admin2 = new Administrador(identificador_usuario, "Clarice Lopes", "clarice_lopes@gmail.com", "cyberpunk2077", perfil_admin2, true);
+		
+		admin1.criarCadastro(admin2);
 		
 		
 		System.out.println("Bem vindo ao American Prime. Gostaria de se cadastrar? (S/N)");
@@ -323,7 +330,7 @@ public class Main {
 			
 		//lista de usuarios cadastrados
 		System.out.println(admin1.getCadastroUsuarios());	
-		
+		System.out.println("Total de usuários cadastrados na plataforma: " + Administrador.getQuantidadeUsuarios());
 		System.out.println("****************************************************************************\n");
 		System.out.println("Operação finalizada. \n");
 		

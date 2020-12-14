@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class UsuariosCadastrados {
+	private Administrador dono;
 	private ArrayList<Usuario> usuariosCadastrados;
 	
 	public UsuariosCadastrados() {
@@ -11,6 +12,14 @@ public class UsuariosCadastrados {
 		return usuariosCadastrados;
 	}
 	
+	public Administrador getDono() {
+		return dono;
+	}
+
+	public void setDono(Administrador dono) {
+		this.dono = dono;
+	}
+
 	@Override
 	public String toString() {
 		if (this.getUsuariosCadastrados().isEmpty()) {
