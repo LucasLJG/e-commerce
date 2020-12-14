@@ -48,7 +48,7 @@ public class Caixa {
 				// Somando [precoUnitario * Quantidade].
 				preco += item.getPrecoUnitario() * item.getQuantidade();
 				 
-				System.out.println("Preço sem desconto, R$: " + item.getPrecoUnitario() * item.getQuantidade());
+				System.out.println("Preco sem desconto, R$: " + item.getPrecoUnitario() * item.getQuantidade());
 			}
 			// Aplicando o desconto e armazenando.
 			preco = preco * 0.95;

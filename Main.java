@@ -69,12 +69,24 @@ public class Main {
 			identificador_pedido++;
 			System.out.println("Digite seu nome completo");
 			String nome = leitor.nextLine();
+			while (nome.isEmpty()) {
+				System.out.println("Entrada invalida. Digite seu nome completo");
+				nome = leitor.nextLine();
+			}
 			
 			System.out.println("Digite seu email");
 			String email = leitor.nextLine();
+			while (email.isEmpty()) {
+				System.out.println("Entrada invalida. Digite seu email");
+				email = leitor.nextLine();
+			}
 			
 			System.out.println("Digite sua senha");
 			String senha = leitor.nextLine();
+			while (senha.isEmpty()) {
+				System.out.println("Entrada invalida. Digite sua senha");
+				senha = leitor.nextLine();
+			}
 			
 			System.out.println("Digite seu sexo: (H/M)");
 			String opcao_sexo = leitor.nextLine();
@@ -155,11 +167,11 @@ public class Main {
 					System.out.println("Selecione a quantidade");
 					int quantidade;
 					String quantidade_mercadoria = leitor.nextLine();
-					while(Pedido.ehInteiro(quantidade_mercadoria) == false) {
+					while(Pedido.ehInteiro(quantidade_mercadoria) == false || quantidade_mercadoria.isEmpty() == true) {
 						System.out.println("Entrada invalida. Selecione a quantidade");
 						quantidade_mercadoria = leitor.nextLine();
 					}
-					
+					System.out.println(quantidade_mercadoria);
 					quantidade = Integer.parseInt(quantidade_mercadoria);
 					
 					

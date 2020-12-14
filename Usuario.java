@@ -136,7 +136,7 @@ public class Usuario {
 			Scanner ler = new Scanner(System.in);
 			String auxiliar;
 			auxiliar = ler.nextLine();
-			while(Pedido.ehInteiro(auxiliar) == false) {
+			while(Pedido.ehInteiro(auxiliar) == false || auxiliar.isEmpty() == true) {
 				System.out.println("Entrada invalida. Selecione a quantidade");
 				auxiliar = ler.nextLine();
 			}
