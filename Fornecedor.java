@@ -47,8 +47,8 @@ public class Fornecedor {
 	public String toString() {
 		String out = "";
 		out = out + "Nome do Fornecedor: " + getNome() + "\n";
-		out = out + "Código: " + getCodigo() + "\n";
-		out = out + "Quantidade Disponível: " + getQuantidadeDisponivel() + "\n";
+		out = out + "Codigo: " + getCodigo() + "\n";
+		out = out + "Quantidade Disponivel: " + getQuantidadeDisponivel() + "\n";
 		out = out + "Status:" + getStatus() + "\n";
 		return out;
 	}
