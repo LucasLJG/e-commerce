@@ -95,7 +95,7 @@ public class Item {
 		out = out + "Nome do Item: " + getNome() + "\n";
 		out = out + "Codigo: " + getCodigo() + "\n";
 		out = out + "Quantidade: " + getQuantidade() + "\n";
-		out = out + "Preco Unitário: " + getPrecoUnitario() + "\n";
+		out = out + "Preco Unitario: " + getPrecoUnitario() + "\n";
 		out = out + "Estoque Disponivel: " + getEstoqueDisponivel() + "\n";
 		out = out + "Status: " + getStatus() + "\n";
 		if (this.getFornecedores().isEmpty()) {
