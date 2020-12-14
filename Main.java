@@ -29,8 +29,8 @@ public class Main {
 		* Instanciando itens
 		*/
 		
-		Item celular = new Item(" Celular", 64368, 1, 1800.00f, 25, true, fabricante_notebook, lista_itens);
-		Item notebook = new Item(" Notebook", 58794, 1, 3200.00f, 15, true, fabricante_celular, lista_itens);
+		Item celular = new Item(" Celular", 64368, 1, 1800.00f, 25, true, fabricante_celular, lista_itens);
+		Item notebook = new Item(" Notebook", 58794, 1, 3200.00f, 15, true, fabricante_notebook, lista_itens);
 		Item camera_fotografica = new Item(" Camera Fotografica", 74185, 1, 1500.00f, 10, true, fabricante_camera, lista_itens);
 		Item oculos = new Item(" Oculos", 17463, 2, 300.50f, 50, true, fabricante_oculos, lista_itens);
 		Item impressora = new Item(" Impressora", 87465, 1, 700.00f, 8, true, fabricante_impressora, lista_itens);
