@@ -88,7 +88,9 @@ public class Usuario {
 					System.out.println("Numero de CPF invalido.\n");
 				}
 			}
-			System.out.println("Endereco de e-mail invalido.\n");
+			else{
+				System.out.println("Endereco de e-mail invalido.\n");
+			}
 		}
 		else {
 			System.out.println("Usuario nao cadastrado.\n");
