@@ -100,7 +100,7 @@ public class Main {
 					
 					System.out.println("Selecione o produto");
 					int mercadoria = Integer.parseInt(leitor.nextLine());
-					while(mercadoria > lista_itens.size()) {
+					while(mercadoria > lista_itens.size()-1) {
 						System.out.println("Entrada invalida.Selecione o produto");
 						mercadoria = Integer.parseInt(leitor.nextLine());					
 					}
@@ -182,7 +182,7 @@ public class Main {
 					
 					System.out.println("Selecione o produto");
 					int mercadoria = Integer.parseInt(leitor.nextLine());
-					while(mercadoria > lista_itens.size()) {
+					while(mercadoria > lista_itens.size()-1) {
 						System.out.println("Entrada invalida.Selecione o produto");
 						mercadoria = Integer.parseInt(leitor.nextLine());					
 					}
