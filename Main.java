@@ -237,7 +237,7 @@ public class Main {
 			
 		//lista de usuarios cadastrados
 		System.out.println(admin1.getCadastroUsuarios());
-		System.out.println("Usuários cadastrados: " + Administrador.getQuantidadeUsuarios());
+		System.out.println("Usuarios cadastrados: " + Administrador.getQuantidadeUsuarios());
 		
 		System.out.println("****************************************************************************\n");
 		System.out.println("Operacao finalizada. \n");
@@ -247,4 +247,3 @@ public class Main {
 		
 	}
 }
-
