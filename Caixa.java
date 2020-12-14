@@ -38,6 +38,8 @@ public class Caixa {
 	 * pedido atual. A funcao retorna a variavel armagenadora.
 	 */
 	public void pagamentoVista (Usuario cliente) {
+		System.out.println("teste " + cliente.getPedidos().get(0).getItem().size());
+		
 		ArrayList<Pedido> pedidos  = cliente.getPedidos(); 
 		ArrayList<BigDecimal> precos = new ArrayList<BigDecimal>();
 		double preco = 0;
@@ -46,6 +48,8 @@ public class Caixa {
 			for (Item item: pedido.getItem()) {
 				// Somando [precoUnitario * Quantidade].
 				preco += item.getPrecoUnitario() * item.getQuantidade();
+				 
+				System.out.println("preco " + item.getPrecoUnitario() * item.getQuantidade());
 			}
 			// Aplicando o desconto e armazenando.
 			preco = preco * 0.95;
@@ -65,7 +69,7 @@ public class Caixa {
 	 * posicao da array de pedidos, e soma o [precoUnitario * Quantidade] de cada posicao do array 
 	 * de Itens para calcular o preco total da atual pedido e depois divide pelo numero de parcelas.
 	 * Por fim, armazena esse valor em um novo array (precos) na mesma posicao dopedido atual. 
-	 * A funcao retorna a variavel armagenadora sendo a ultima posicao o numero de parcelas.
+	 * A funcao retorna a variavel armazenadora sendo a ultima posicao o numero de parcelas.
 	 */
 	public ArrayList<BigDecimal> pagamentoParcelado (Usuario cliente) {
 		double parcelas;
@@ -78,12 +82,12 @@ public class Caixa {
 		System.out.println("[1]: 3 parcelas\n[2]: 6 parcelas\n[3]: 9 parcelas\n[4]: 12 parcelas");
 		String tipo = ler.nextLine();
 		while (tipo.contains("1") == false  && tipo.contains("2") == false && tipo.contains("3") == false && tipo.contains("4") == false) {
-			System.out.println("Op√ß√£o inv√°lida.");
+			System.out.println("OpÁ„o inv·lida.");
 			System.out.println("Escolha o numero de parcelas entre as opcoes abaixo digitando o numero entre []:");
 			System.out.println("[1]: 3 parcelas\n[2]: 6 parcelas\n[3]: 9 parcelas\n[4]: 12 parcelas");
 			tipo = ler.nextLine();
 		}
-		ler.close();
+		
 		if (tipo.contains("1")) parcelas = 3;
 		else if (tipo.contains("2")) parcelas = 6;
 		else if (tipo.contains("3")) parcelas = 9;
@@ -102,12 +106,14 @@ public class Caixa {
 			precos.add(preco_corrigido);
 			
 		}
+		
 		BigDecimal parcelas_corrigidas = new BigDecimal(parcelas).setScale(0, RoundingMode.HALF_EVEN);
 		precos.add(parcelas_corrigidas);
-		System.out.println("Pagamento parcelado, sem cobran√ßa de juros. Os valores das parcelas de cada pedido conforme a sua escolha. ");
-		for (int j = 0; j < precos.size(); j++) {
-			System.out.println("Pedido " + (j+1) + ": " + "\n" + "Parcelado em " + parcelas + " vezes: Valor de cada parcela: R$: " + precos.get(j));
+		System.out.println("Pagamento parcelado, sem cobranÁa de juros. Os valores das parcelas de cada pedido conforme a sua escolha. ");
+		for (int j = 0; j < precos.size() - 1; j++) {
+			System.out.println("Pedido " + (j+1) + ": " + "\n" + "Parcelado em " + parcelas_corrigidas + " vezes: Valor de cada parcela: R$: " + precos.get(j));
 		}
+		
 		return precos;
 	}
 	

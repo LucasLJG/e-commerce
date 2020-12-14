@@ -55,7 +55,7 @@ public class Pedido {
 	@Override
 	public String toString() {
 		if (this.getItem().isEmpty()) {
-			String out = "Não há itens em pedidos do usuário \n";
+			String out = "Nao ha itens em pedidos do usuario \n";
 			return out;
 		}
 		else {
@@ -65,7 +65,7 @@ public class Pedido {
 			}
 			else {
 				String out = "";
-				out = out + "Código do Pedido: " + getCodigo() + "\n";
+				out = out + "Codigo do Pedido: " + getCodigo() + "\n";
 				out = out + "Nome do Vendedor: " + getNomeVendedor() + "\n";
 				int k = 1;
 				out = out + "Itens do Pedido: ";

@@ -6,9 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		/* 
-		* Instanciando itens
-		*/
+	
 		
 		ArrayList<Item> lista_itens;
 		lista_itens = new ArrayList<Item>();
@@ -27,6 +25,10 @@ public class Main {
 		Fornecedor fabricante_caneta = new Fornecedor(91025, "Caneta Inc", 4000, true);
 		Fornecedor fabricante_agenda = new Fornecedor(18798, "Agenda SA", 500, true);
 
+		/* 
+		* Instanciando itens
+		*/
+		
 		Item celular = new Item(" Celular", 64368, 1, 1800.00f, 25, true, fabricante_notebook, lista_itens);
 		Item notebook = new Item(" Notebook", 58794, 1, 3200.00f, 15, true, fabricante_celular, lista_itens);
 		Item camera_fotografica = new Item(" Camera Fotografica", 74185, 1, 1500.00f, 10, true, fabricante_camera, lista_itens);
@@ -40,7 +42,7 @@ public class Main {
 
 		
 		Scanner leitor = new Scanner(System.in);
-		Scanner formaPagamento = new Scanner(System.in);
+		
 
 		
 		Perfil perfil_admin1 = new Perfil(Sexo.HOMEM, new GregorianCalendar(2020, 12, 8), Estado.MINAS_GERAIS.getCapital(), Estado.MINAS_GERAIS, "15 88888-8888", "123XXXXXXXXX/89");
@@ -55,6 +57,7 @@ public class Main {
 			System.out.println("Bem vindo ao American Prime. Gostaria de se cadastrar? (S/N)");
 			opcao_usuario = leitor.nextLine();
 		}
+		
 		String cadastro = opcao_usuario;
 		while(cadastro.equals("S")) {
 			identificador_usuario++;
@@ -87,24 +90,48 @@ public class Main {
 				
 				while (compras.contains("S") == false  && compras.contains("N") == false) {
 					System.out.println("Entrada invalida.");
-					System.out.println("\nGostaria de adquirir um produto (S/N)");
+					System.out.println("Gostaria de adquirir um produto (S/N)");
 					compras = leitor.nextLine();
 				}
+				ArrayList<Item> lista_auxiliar;
+				lista_auxiliar = new ArrayList<Item>();
 				
 				while(compras.equals("S")) {
-					System.out.println("\nSelecione o produto e quantidade (produto - quantidade) ");
-					String carrinho[] = leitor.nextLine().split(" - ");
-					int pedido = Integer.parseInt(carrinho[0]);
-					int quantidade = Integer.parseInt(carrinho[1]);
-					pedido1_user1.getItem().add(lista_itens.get(pedido));
-					lista_itens.get(pedido).setQuantidade(quantidade);
+					
+					System.out.println("Selecione o produto");
+					int mercadoria = Integer.parseInt(leitor.nextLine());
+					while(mercadoria > lista_itens.size()) {
+						System.out.println("Entrada invalida.Selecione o produto");
+						mercadoria = Integer.parseInt(leitor.nextLine());					
+					}
+					System.out.println("Selecione a quantidade");
+					int quantidade = Integer.parseInt(leitor.nextLine());
+					while(quantidade > lista_itens.get(mercadoria).getEstoqueDisponivel()) {
+						System.out.println("Entrada invalida. Selecione a quantidade");
+						quantidade = Integer.parseInt(leitor.nextLine());
+					}
+					
+
+					
+					//instanciacao de um novo item baseado no produto escolhido
+					Item auxiliar = new Item(lista_itens.get(mercadoria).getNome(), lista_itens.get(mercadoria).getCodigo(), 
+							lista_itens.get(mercadoria).getQuantidade(), lista_itens.get(mercadoria).getPrecoUnitario(), 
+							lista_itens.get(mercadoria).getEstoqueDisponivel(), true, fabricante_celular, lista_auxiliar);
+					
+					//adicionar item ao pedido do usuario
+					user1.adicionaItem(auxiliar, pedido1_user1, quantidade);
+					
+					//alterar estoque dos itens da lista de itens
+					lista_itens.get(mercadoria).setEstoqueDisponivel(auxiliar.getEstoqueDisponivel());
+					
+					
 					System.out.println("\nGostaria de adquirir mais produtos (S/N)");
 					compras = leitor.nextLine();
-					while (compras.contains("S") == false  && compras.contains("N") == false) {
-						System.out.println("Entrada invalida.");
-						System.out.println("\nGostaria de adquirir um produto (S/N)");
+					while (compras.equals("S") == false  && compras.equals("N") == false) {
+						System.out.println("Entrada invalida. Gostaria de adquirir mais produtos (S/N)");
 						compras = leitor.nextLine();
 					}
+					
 				}
 				Caixa total = new Caixa(1, true);
 				System.out.printf("Dados de Usuario: \n");
@@ -112,20 +139,24 @@ public class Main {
 				System.out.println("Dados de perfil do Usuario: ");
 				System.out.println(perfil_user1);
 				System.out.println("****************************************************************************");
-				System.out.println("Qual a forma de pagamento ? \n1 - Pagamento a vista \n2 - Pagamento parcelado");
-				String opcaoPagamento = formaPagamento.nextLine();
-				while (opcaoPagamento.contains("1") == false && opcaoPagamento.contains("2") == false) {
-					System.out.println("Entrada invalida, Digite 1 ou 2 para acessar sua opcao. \n");
+				
+				//caso o item nao for vazio, solicitar forma de pagamento
+				if (user1.getPedidos().get(0).getItem().isEmpty() == false) {
 					System.out.println("Qual a forma de pagamento ? \n1 - Pagamento a vista \n2 - Pagamento parcelado");
-					opcaoPagamento = formaPagamento.nextLine();
+					String opcaoPagamento = leitor.nextLine();
+					while (opcaoPagamento.contains("1") == false && opcaoPagamento.contains("2") == false) {
+						System.out.println("Entrada invalida, Digite 1 ou 2 para acessar sua opcao. \n");
+						System.out.println("Qual a forma de pagamento ? \n1 - Pagamento a vista \n2 - Pagamento parcelado");
+						opcaoPagamento = leitor.nextLine();
+					}
+					if (opcaoPagamento.contains("1")) {
+						total.pagamentoVista(user1);
+					}
+					else {
+						total.pagamentoParcelado(user1);
+					}
+					System.out.println("\n****************************************************************************\n");
 				}
-				if (opcaoPagamento.contains("1")) {
-					total.pagamentoVista(user1);
-				}
-				else {
-					total.pagamentoParcelado(user1);
-				}			
-				System.out.println("\n****************************************************************************\n");
 			}
 			else {
 				Perfil perfil_user1 = new Perfil(Sexo.MULHER, new GregorianCalendar(1998, 05, 22), Estado.SAO_PAULO.getCapital(), Estado.SAO_PAULO, "19 99999-9999", "257XXXXXXXXX/55");
@@ -140,24 +171,49 @@ public class Main {
 				
 				while (compras.contains("S") == false  && compras.contains("N") == false) {
 					System.out.println("Entrada invalida.");
-					System.out.println("\nGostaria de adquirir um produto (S/N)");
+					System.out.println("Gostaria de adquirir um produto (S/N)");
 					compras = leitor.nextLine();
 				}
 				
-				while(compras.equals("S")) {
-					System.out.println("\nSelecione o produto e quantidade (produto - quantidade) ");
-					String carrinho[] = leitor.nextLine().split(" - ");
-					int pedido = Integer.parseInt(carrinho[0]);
-					int quantidade = Integer.parseInt(carrinho[1]);
-					pedido1_user1.getItem().add(lista_itens.get(pedido));
-					lista_itens.get(pedido).setQuantidade(quantidade);
+				ArrayList<Item> lista_auxiliar;
+				lista_auxiliar = new ArrayList<Item>();
+				
+while(compras.equals("S")) {
+					
+					System.out.println("Selecione o produto");
+					int mercadoria = Integer.parseInt(leitor.nextLine());
+					while(mercadoria > lista_itens.size()) {
+						System.out.println("Entrada invalida.Selecione o produto");
+						mercadoria = Integer.parseInt(leitor.nextLine());					
+					}
+					System.out.println("Selecione a quantidade");
+					int quantidade = Integer.parseInt(leitor.nextLine());
+					while(quantidade > lista_itens.get(mercadoria).getEstoqueDisponivel()) {
+						System.out.println("Entrada invalida. Selecione a quantidade");
+						quantidade = Integer.parseInt(leitor.nextLine());
+					}
+					
+
+					
+					//instanciacao de um novo item baseado no produto escolhido
+					Item auxiliar = new Item(lista_itens.get(mercadoria).getNome(), lista_itens.get(mercadoria).getCodigo(), 
+							lista_itens.get(mercadoria).getQuantidade(), lista_itens.get(mercadoria).getPrecoUnitario(), 
+							lista_itens.get(mercadoria).getEstoqueDisponivel(), true, fabricante_celular, lista_auxiliar);
+					
+					//adicionar item ao pedido do usuario
+					user1.adicionaItem(auxiliar, pedido1_user1, quantidade);
+					
+					//alterar estoque dos itens da lista de itens
+					lista_itens.get(mercadoria).setEstoqueDisponivel(auxiliar.getEstoqueDisponivel());
+					
+					
 					System.out.println("\nGostaria de adquirir mais produtos (S/N)");
 					compras = leitor.nextLine();
-					while (compras.contains("S") == false  && compras.contains("N") == false) {
-						System.out.println("Entrada invalida.");
-						System.out.println("\nGostaria de adquirir um produto (S/N)");
+					while (compras.equals("S") == false  && compras.equals("N") == false) {
+						System.out.println("Entrada invalida. Gostaria de adquirir mais produtos (S/N)");
 						compras = leitor.nextLine();
 					}
+					
 				}
 				Caixa total = new Caixa(1, true);
 				System.out.printf("Dados de Usuario: \n");
@@ -165,21 +221,25 @@ public class Main {
 				System.out.println("Dados de perfil do Usuario: ");
 				System.out.println(perfil_user1);
 				System.out.println("****************************************************************************");
-				System.out.println("Qual a forma de pagamento ? \n1 - Pagamento a vista \n2 - Pagamento parcelado");
-				String opcaoPagamento = formaPagamento.nextLine();
-				while (opcaoPagamento.contains("1") == false && opcaoPagamento.contains("2") == false) {
-					System.out.println("Entrada invalida, Digite 1 ou 2 para acessar sua opcao. \n");
+				
+				//caso o item nao for vazio, solicitar forma de pagamento
+				if (user1.getPedidos().get(0).getItem().isEmpty() == false) {
 					System.out.println("Qual a forma de pagamento ? \n1 - Pagamento a vista \n2 - Pagamento parcelado");
-					opcaoPagamento = formaPagamento.nextLine();
+					String opcaoPagamento = leitor.nextLine();
+					while (opcaoPagamento.contains("1") == false && opcaoPagamento.contains("2") == false) {
+						System.out.println("Entrada invalida, Digite 1 ou 2 para acessar sua opcao. \n");
+						System.out.println("Qual a forma de pagamento ? \n1 - Pagamento a vista \n2 - Pagamento parcelado");
+						opcaoPagamento = leitor.nextLine();
+					}
+					if (opcaoPagamento.contains("1")) {
+						total.pagamentoVista(user1);
+					}
+					else {
+						total.pagamentoParcelado(user1);
+					}
+					System.out.println("\n****************************************************************************\n");
 				}
-				if (opcaoPagamento.contains("1")) {
-					total.pagamentoVista(user1);
-				}
-				else {
-					total.pagamentoParcelado(user1);
-				}
-				System.out.println("\n****************************************************************************\n");
-			}	
+			}
 			System.out.println("Gostaria de cadastrar mais alguem ? (S/N)");
 			cadastro = leitor.nextLine();
 			while (cadastro.contains("S") == false  && cadastro.contains("N") == false) {
@@ -191,13 +251,32 @@ public class Main {
 				System.out.println("Cadastro de clientes encerrado. ");
 			}
 		}
-		formaPagamento.close();
+		
 		System.out.println("\n****************************************************************************");
 			
 		//lista de usuarios cadastrados
 		System.out.println(admin1.getCadastroUsuarios());
 
+		
+		System.out.println("Operacao finalizada com sucesso.\n");
+		
+		
+		System.out.println("\n****************************************************************************\n");
+		if(admin1.getCadastroUsuarios().getUsuariosCadastrados().isEmpty() == false) {
+			admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).alterar_senha
+			(admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).getEmail(), 
+					admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).getSenha());
+		}
+		
+		if(admin1.getCadastroUsuarios().getUsuariosCadastrados().isEmpty() == false) {
+			admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).recuperar_senha(
+					admin1.getCadastroUsuarios().getUsuariosCadastrados().get(0).getEmail());
+			
+		}
+		
+		
 		leitor.close();
-		System.out.println("Operação finalizada com sucesso.\n");
+		
+		
 	}
 }

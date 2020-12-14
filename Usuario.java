@@ -85,13 +85,13 @@ public class Usuario {
 					System.out.println(this.getSenha());
 				}
 				else {
-					System.out.println("Numero de CPF invÃ¡lido.\n");
+					System.out.println("Numero de CPF invalido.\n");
 				}
 			}
 			System.out.println("Endereco de e-mail invalido.\n");
 		}
 		else {
-			System.out.println("Usuário não cadastrado.\n");
+			System.out.println("Usuario nao cadastrado.\n");
 		}
 	}
 	
@@ -103,7 +103,6 @@ public class Usuario {
 				System.out.printf("Digite a nova senha de %s: \n", this.getNome());
 				Scanner senha_nova = new Scanner(System.in);
 				String senha_atual = senha_nova.nextLine();
-				senha_nova.close();
 				this.setSenha(senha_atual);
 				System.out.println("Senha alterada com sucesso.\n");
 			}
@@ -112,7 +111,7 @@ public class Usuario {
 			}
 		}
 		else {
-			System.out.println("Usuário não cadastrado");
+			System.out.println("Usuario nao cadastrado");
 		}
 	}
 	/* Essa funcao adiciona um item na lista de item de cada pedido. Para isso, ela acessa o pedido e
@@ -132,25 +131,24 @@ public class Usuario {
 	@Override
 	public String toString() {
 		String out = "";
-		out = out + "Nome: " + this.getNome() + "\n";
-		if (this.getPedidos().isEmpty()) {
+		out = out + "Identificacao do usuario: " + getIdentificador() + "\n";
+		out = out + "Nome: " + getNome() + "\n";
+		if (this.getPedidos().get(0).getItem().isEmpty()) {
+			out = out + "Pedido do Usuario: \n";
 			out = out + "O usuario nao tem pedidos realizados.\n";
 		}
 		else {
 			out = out + "Pedido do Usuario: \n";
-			for (int i = 0; i < this.getPedidos().size(); i++) {
-				for (int k = 0; k < this.getPedidos().get(i).getItem().size(); k++) {
-					if (this.getPedidos().get(i).getItem().isEmpty()) {
-						out = out + "Pedido " + (i+1) + ": sem itens comprados";
-					}
-					else {
-						String nome = this.getPedidos().get(i).getItem().get(k).getNome();
-						out = out + "Item " + (k+1) + ": " + nome + "\n";
-					}
+			int j = 1;
+			for (Pedido pedido_atual: getPedidos()) {
+				for (int i = 0; i < pedido_atual.getItem().size(); i++) {
+					String nome = pedido_atual.getItem().get(i).getNome();
+					out = out + "Item" + j + "\n";
+					out = out + "Nome: " + nome + "\n";
+					j++;
 				}
 			}
 		}
 		return out;
 	}
-	
 }

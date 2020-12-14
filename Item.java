@@ -9,6 +9,7 @@ public class Item {
 	private boolean status;
 	private ArrayList<Fornecedor> fornecedores;
 	
+	//todo item instanciado eh adicionado a lista de itens
 	public Item(String nome, int codigo, int quantidade, float precoUnitario, int estoqueDisponivel, boolean status, Fornecedor fornecedor, ArrayList<Item> lista_itens) {
 		this.nome = nome;
 		this.codigo = codigo;
