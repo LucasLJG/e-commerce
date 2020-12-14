@@ -178,7 +178,7 @@ public class Main {
 				ArrayList<Item> lista_auxiliar;
 				lista_auxiliar = new ArrayList<Item>();
 				
-while(compras.equals("S")) {
+				while(compras.equals("S")) {
 					
 					System.out.println("Selecione o produto");
 					int mercadoria = Integer.parseInt(leitor.nextLine());
@@ -280,3 +280,4 @@ while(compras.equals("S")) {
 		
 	}
 }
+
