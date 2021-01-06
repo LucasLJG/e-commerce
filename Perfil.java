@@ -1,6 +1,8 @@
 import java.util.Calendar;
+import java.io.Serializable;
 
-public class Perfil {
+public class Perfil implements Serializable{
+	private static final long serialVersionUID = 301L;
 	private Sexo sexo;
 	private Calendar dataNascimento;
 	private String cidade;

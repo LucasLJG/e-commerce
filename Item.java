@@ -7,18 +7,15 @@ public class Item {
 	private float precoUnitario;
 	private int estoqueDisponivel;
 	private boolean status;
-	private ArrayList<Fornecedor> fornecedores;
 	
 	//todo item instanciado eh adicionado a lista de itens
-	public Item(String nome, int codigo, int quantidade, float precoUnitario, int estoqueDisponivel, boolean status, Fornecedor fornecedor, ArrayList<Item> lista_itens) {
+	public Item(String nome, int codigo, int quantidade, float precoUnitario, int estoqueDisponivel, boolean status, ArrayList<Item> lista_itens) {
 		this.nome = nome;
 		this.codigo = codigo;
 		this.quantidade = quantidade;
 		this.precoUnitario = precoUnitario;
 		this.estoqueDisponivel = estoqueDisponivel;
 		this.status = status;
-		fornecedores = new ArrayList<Fornecedor>();
-		fornecedores.add(fornecedor);
 		lista_itens.add(this);
 	}
 	
@@ -70,21 +67,12 @@ public class Item {
 		this.status = status;
 	}
 
-	public ArrayList<Fornecedor> getFornecedores() {
-		return fornecedores;
-	}
 	
 	public static void listar_catalogo(ArrayList<Item> lista_itens) {
 		System.out.println("\nLista de produtos: ");	
 		for(int i = 0; i < lista_itens.size(); i++) {
 			System.out.println(i + "-" + lista_itens.get(i).getNome() + " - " + "preco: R$: " + lista_itens.get(i).getPrecoUnitario() + 
 					" - " + "quantidade: " + lista_itens.get(i).getEstoqueDisponivel());	
-		}
-	}
-	
-	public void reposicao_estoque() { // rep�em o estoque quando restar 50 unidades
-		if(this.getEstoqueDisponivel() < 50) {
-			this.setEstoqueDisponivel(fornecedores.get(0).getQuantidadeDisponivel());
 		}
 	}
 
@@ -98,17 +86,7 @@ public class Item {
 		out = out + "Preco Unitario: " + getPrecoUnitario() + "\n";
 		out = out + "Estoque Disponivel: " + getEstoqueDisponivel() + "\n";
 		out = out + "Status: " + getStatus() + "\n";
-		if (this.getFornecedores().isEmpty()) {
-			out = out + "Os fornecedores estao temporariamente indisponiveis para esse item";
-		}
-		else {
-			int j = 1;
-			for (Fornecedor fornecedor_item: this.getFornecedores()) {
-				out = out + "Fornecedor" + j;
-				out = out + "Nome: " + fornecedor_item.getNome() + "\n";
-				j++;
-			}
-		}
+		
 		return out;
 	}
 	

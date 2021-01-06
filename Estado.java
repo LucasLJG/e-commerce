@@ -17,7 +17,7 @@ public enum Estado {
 	PARAIBA("PB","Paraiba","Joao Pessoa"),
 	PARANA("PR","Parana","Curitiba"),
 	PERNAMBUCO("PE","Pernambuco","Recife"),
-	PIAUI("PI","Piaui­","Teresina"),
+	PIAUI("PI","Piauiï¿½","Teresina"),
 	RIO_DE_JANEIRO("RJ","Rio de Janeiro","Rio de Janeiro"),
 	RIO_GRANDE_DO_NORTE("RN","Rio Grande do Norte","Capital Natal"),
 	RIO_GRANDE_DO_SUL("RS","Rio Grande do Sul","Porto Alegre"),
@@ -48,5 +48,14 @@ public enum Estado {
 
 	public String getCapital() {
 		return capital;
+	}
+	
+	@Override
+	public String toString() {
+		String out = "";
+		out = out + "Sigla: " + getSigla() + "\n";
+		out = out + "Nome: " + getNome() + "\n";
+		out = out + "Capital: " + getCapital() + "\n";
+		return out;
 	}
 }

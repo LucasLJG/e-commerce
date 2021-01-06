@@ -1,4 +1,3 @@
-
 public enum Sexo {
 	HOMEM("M","Masculino"),
 	MULHER("F","Feminino");
@@ -16,5 +15,13 @@ public enum Sexo {
 	}
 	public String getDescricao() {
 		return descricao;
+	}
+	
+	@Override
+	public String toString() {
+		String out = "";
+		out = out + "Sigla: " + getSigla() + "\n";
+		out = out + "Descrição: " + getDescricao() + "\n";
+		return out;
 	}
 }

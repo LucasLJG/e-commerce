@@ -86,7 +86,6 @@ public class Caixa {
 			System.out.println("[3]: 3 parcelas\n[6]: 6 parcelas\n[9]: 9 parcelas\n[12]: 12 parcelas");
 			tipo = ler.nextLine();
 		}
-		
 		if (tipo.equals("3")) parcelas = 3;
 		else if (tipo.equals("6")) parcelas = 6;
 		else if (tipo.equals("9")) parcelas = 9;

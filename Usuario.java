@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-public class Usuario {
+import java.io.*;
+
+public abstract class Usuario implements Serializable{
+	private static final long serialVersionUID = 302L;
 	private int identificador;
 	private String nome;
 	private String email;
@@ -71,6 +74,12 @@ public class Usuario {
 		this.status = status;
 	}
 	
+	
+	// METODOS QUE PRECISAM SER IMPLEMENTADOS EM CLASSES FILHAS SE ELAS QUISEREM SER CONCRETAS.
+	public abstract void criarCadastro(Usuario usuario_adicionar);
+	public abstract void removerCadastro(Usuario usuario_remover);
+	public abstract void desabilitar_usuario(Usuario usuario_desabilitar);
+	
 	public void recuperar_senha(String email) {
 		
 		if(this.getStatus() == true) {
@@ -79,7 +88,6 @@ public class Usuario {
 				System.out.println("Digite o numero do seu cpf para confirmacao de autenticidade: \n");
 				Scanner dados = new Scanner(System.in);
 				String entrada = dados.nextLine();
-				dados.close();
 				if (this.getPerfil().getCpf().equals(entrada) == true) {
 					System.out.println("Senha: ");
 					System.out.println(this.getSenha());
@@ -105,7 +113,6 @@ public class Usuario {
 				System.out.println("Como medida adicional de seguranca, por favor digite o numero de seu CPF no formato (YYYXXX/ZA): ");
 				Scanner cpf_usuario = new Scanner(System.in);
 				String cpf_paraValidar = cpf_usuario.nextLine();
-				cpf_usuario.close();
 				if (this.getPerfil().getCpf().equals(cpf_paraValidar)) {
 					System.out.println("CPF validado com sucesso. \n");
 					System.out.printf("Digite a nova senha de %s: \n", this.getNome());
@@ -113,7 +120,6 @@ public class Usuario {
 					String senha_atual = senha_nova.nextLine();
 					this.setSenha(senha_atual);
 					System.out.println("Senha alterada com sucesso. \n");
-					senha_nova.close();
 				}
 				else {
 					System.out.println("CPF invalido. \n");
@@ -131,9 +137,9 @@ public class Usuario {
 	 * adiciona o item e, em seguida, atualiza os dados do item.
 	 */
 	public void adicionaItem (Item item, Pedido pedido, int quantidade) {
+		Scanner ler = new Scanner(System.in);
 		while(item.getEstoqueDisponivel() < quantidade) {
 			System.out.println("Nao possuimos estoque suficiente desse item.\nSelecione a quantidade");
-			Scanner ler = new Scanner(System.in);
 			String auxiliar;
 			auxiliar = ler.nextLine();
 			while(Pedido.ehInteiro(auxiliar) == false || auxiliar.isEmpty() == true) {
@@ -142,10 +148,58 @@ public class Usuario {
 			}
 			quantidade = Integer.parseInt(auxiliar);
 		}
-		
 		item.setQuantidade(quantidade);
 		item.setEstoqueDisponivel(item.getEstoqueDisponivel() - quantidade);
 		pedido.getItem().add(item);
+	}
+	
+	// GRAVANDO OS OBJETOS EM FORMATO BINARIO NO ARQUIVO.
+	public static void gravarArquivosEmBinario(ArrayList<Usuario> usuarios, String nomeDoArquivo) {
+		File arquivo = new File(nomeDoArquivo);
+		try {
+			arquivo.delete();
+			arquivo.createNewFile();
+			ObjectOutputStream saida = new ObjectOutputStream(new FileOutputStream(arquivo));
+			saida.writeObject(usuarios);
+			saida.close();
+		}
+		catch(IOException erro) {
+			System.out.println("A operação resultou em erro: " + erro.getMessage());
+		}
+	}
+	
+	// RECUPERANDO OS OBJETOS GRAVADOS EM FORMATO BINARIO NO ARQUIVO.
+	public static void lerArquivosEmBInario(String nomeDoArquivo){
+		/*
+		boolean validador = false;
+		boolean marcador = true;
+		ArrayList<Usuario> usuarios = new ArrayList();
+		try {
+			File arquivo = new File(nomeDoArquivo);
+			if (arquivo.exists()) {
+				ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(arquivo));
+				usuarios = (ArrayList<Usuario>)entrada.readObject();
+				entrada.close();
+				validador = true;
+			}
+		}
+		*/
+		try {
+			ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(nomeDoArquivo));
+			while (true) {
+				ArrayList<Usuario> usuarioSerializado = (ArrayList<Usuario>) entrada.readObject();
+				System.out.println(usuarioSerializado);
+			}
+		}
+		catch(EOFException endOfFileException) {
+			return;
+		}
+		catch(IOException erro1) {
+			System.out.println("A operação resultou em erro. Descrição do erro: " + erro1.getMessage());
+		}
+		catch (ClassNotFoundException erro2) {
+			System.out.println("A operação resultou em erro. Descrição do erro: " + erro2.getMessage());
+		}
 	}
 	
 	@Override
@@ -158,14 +212,14 @@ public class Usuario {
 			out = out + "O usuario nao tem pedidos realizados.\n";
 		}
 		else {
-			out = out + "Pedido do Usuario: \n";
+			out = out + "Pedido de " + this.getNome() + ":\n";
 			int j = 1;
 			for (Pedido pedido_atual: getPedidos()) {
 				for (int i = 0; i < pedido_atual.getItem().size(); i++) {
 					String nome = pedido_atual.getItem().get(i).getNome();
 					int quantidade = pedido_atual.getItem().get(i).getQuantidade();
-					out = out + "Item" + j + "\n";
-					out = out + "Nome:" + nome + "; " ;
+					out = out + "Item " + j + ":\n";
+					out = out + "Nome:" + nome + " \n" ;
 					out = out + "Quantidade: " + quantidade + "\n"; 
 					j++;
 				}

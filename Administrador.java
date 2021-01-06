@@ -1,4 +1,5 @@
-public class Administrador extends Usuario{
+public class Administrador extends Usuario implements Autenticacao{
+	private static final long serialVersionUID = 304L;
 	private UsuariosCadastrados cadastroUsuarios;
 	private static int quantidadeUsuarios = 0;
 	
@@ -64,6 +65,23 @@ public class Administrador extends Usuario{
 				}
 			}
 		}
+	}
+	
+	public boolean autenticarAcesso(String senhaUsuario) {
+		if (this.getSenha() == senhaUsuario) {
+			return true;
+		}
+		else {
+			System.out.println("Senha inválida! Acesso não autorizado ao sistema. \n");
+			return false;
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
+		// IMPRIMIR QUANTIDADES DE USUARIOS CADASTRADOS.
+		
 	}
 	
 }
