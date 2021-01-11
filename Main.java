@@ -225,14 +225,21 @@ public class Main {
 		
 		
 		// E PRECISO CONSERTAR A FUNCAO DE ARQUIVOS. GRAVAR OU LER NAO ESTA FUNCIONANDO DIREITO.
-		/*
-		// SALVANDO OS DADOS DE USUARIOS EM ARQUIVO.
-		String nomeDoArquivo = "cadastroUsuarios.dat";
-		Usuario.gravarArquivosEmBinario(admin1.getCadastroUsuarios().getUsuariosCadastrados(), nomeDoArquivo);
+		try {
+			// SALVANDO OS DADOS DE USUARIOS EM ARQUIVO.
+			String nomeDoArquivo = "cadastroUsuarios.dat";
+			Usuario.gravarArquivosEmBinario(admin1.getCadastroUsuarios().getUsuariosCadastrados(), nomeDoArquivo);
+		} catch(IndexOutOfBoundsException e){
+			System.out.println("o erro esta na gravacao");
+		}
 		
 		// LENDO OS DADOS DE USUARIOS GRAVADOS EM ARQUIVO.
+		try {
 		System.out.println("Lendo os dados de usuários cadastrados no sistema: ");
 		Usuario.lerArquivosEmBInario(nomeDoArquivo);
+		} catch(IndexOutOfBoundsException e){
+			System.out.println("o erro esta na leitura");
+		}
 		
 		
 		System.out.println("Operação finalizada. \n");
