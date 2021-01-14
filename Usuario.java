@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.io.*;
 
@@ -155,13 +156,22 @@ public abstract class Usuario implements Serializable{
 	
 	// GRAVANDO OS OBJETOS EM FORMATO BINARIO NO ARQUIVO.
 	public static void gravarArquivosEmBinario(ArrayList<Usuario> usuarios, String nomeDoArquivo) {
-		File arquivo = new File(nomeDoArquivo);
+		//File arquivo = new File(nomeDoArquivo);
 		try {
+			ObjectOutputStream out = new ObjectOutputStream (new FileOutputStream ("Teste.txt"));
+			for (Usuario usuario: usuarios)
+			{
+				out.writeObject(usuario);
+				out.flush();
+				out.close();
+			}
+		/*
 			arquivo.delete();
 			arquivo.createNewFile();
 			ObjectOutputStream saida = new ObjectOutputStream(new FileOutputStream(arquivo));
 			saida.writeObject(usuarios);
 			saida.close();
+			*/
 		}
 		catch(IOException erro) {
 			System.out.println("A operação resultou em erro: " + erro.getMessage());
@@ -184,11 +194,14 @@ public abstract class Usuario implements Serializable{
 			}
 		}
 		*/
+		int i = 0;
 		try {
-			ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(nomeDoArquivo));
+			ObjectInputStream in = new ObjectInputStream (new FileInputStream ("Teste.txt"));
 			while (true) {
-				ArrayList<Usuario> usuarioSerializado = (ArrayList<Usuario>) entrada.readObject();
+				Usuario usuarioSerializado = (Usuario) in.readObject();
+				System.out.println("*** Lendo Resistro do usuario " + (++ i));
 				System.out.println(usuarioSerializado);
+				
 			}
 		}
 		catch(EOFException endOfFileException) {
