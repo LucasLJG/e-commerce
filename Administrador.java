@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 public class Administrador extends Usuario implements Autenticacao{
 	private static final long serialVersionUID = 304L;
 	private UsuariosCadastrados cadastroUsuarios;
@@ -68,11 +70,11 @@ public class Administrador extends Usuario implements Autenticacao{
 	}
 	
 	public boolean autenticarAcesso(String senhaUsuario) {
-		if (this.getSenha() == senhaUsuario) {
+		if (this.getSenha().equals(senhaUsuario)) {
 			return true;
 		}
 		else {
-			System.out.println("Senha inválida! Acesso não autorizado ao sistema. \n");
+			JOptionPane.showMessageDialog(null, "Senha inválida. Acesso ao sistema negado!", "Senha inválida!", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 	}

@@ -25,7 +25,7 @@ public class UsuarioComum extends Usuario implements Autenticacao {
 	}
 	
 	public boolean autenticarAcesso(String senhaUsuario) {
-		if (this.getSenha() == senhaUsuario) {
+		if (this.getSenha().equals(senhaUsuario)) {
 			System.out.println("Acesso concedido com sucesso! \n");
 			System.out.println("Gostaria de atualizar suas informações de cadastro ? Digite [1] para alterar sua senha ou [2] para recuperar sua senha: ");
 			Scanner entrada_usuario = new Scanner(System.in);

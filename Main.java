@@ -34,32 +34,32 @@ public class Main {
 		Perfil perfil_admin2 = new Perfil(Sexo.MULHER, new GregorianCalendar(1980, 12, 15), Estado.SAO_PAULO.getCapital(), Estado.SAO_PAULO, "11 98547-7584", "456XXXXXXXXX/74");
 		Administrador admin2 = new Administrador(identificador_usuario, "Clarice Lopes", "clarice_lopes@gmail.com", "cyberpunk2077", perfil_admin2, true);
 		
-		// AUTENTICANDO UM ADMIN NO SISTEMA.
 		admin1.criarCadastro(admin1);
 		admin1.getCadastroUsuarios().setDono(admin1);
 		admin1.criarCadastro(admin2);
 		
 		String nome;
 		String senhaAutenticacao;
+		boolean validador = false;
 		
 		// FAZER A AUTENTICACAO DO ADMINISTRADOR NO SISTEMA (PEDIR A SENHA).
 		
-		/*
-		senhaAutenticacao = JOptionPane.showInputDialog("É preciso autenticação do Administrador para entrar no sistema. Por favor digite a senha: ");
-		if (admin1.autenticarAcesso(senhaAutenticacao) == true) {
-			JOptionPane.showMessageDialog(null, "Acesso autorizado ao sistema.");
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (Exception erro) {
+			System.out.println("Erro: " + erro.getMessage());
 		}
-		else {
-			 JOptionPane.showMessageDialog(null, JOptionPane.ERROR_MESSAGE, "Senha inválida. Acesso ao sistema negado!");
-		}
-		*/
+		Object[] opcaoAutenticacao = {"Confirmar","Cancelar"};
+		
+		senhaAutenticacao = JOptionPane.showInputDialog(null," É preciso autenticação do Administrador para entrar no sistema. Por favor digite a senha: ");
+		
+		// NA AUTENTICAÇÃO DE ACESSO, SE A SENHA ESTIVER ERRADA, É PARA ENCERRAR O SISTEMA. SE ESTIVER CERTA, ENTÃO IR PARA O CADASTRO DE USUÁRIOS.
 		
 		Scanner leitor = new Scanner(System.in);
 		String compras = null;
 		String cadastro = null;
 		int opcaoUsuario;
 		
-		// INTERFACE GRAFICA 
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		} catch (Exception erro) {
@@ -73,7 +73,7 @@ public class Main {
 			cadastro = "N";
 		}
 		
-		// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO.
+		// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO (PORQUE DÁ ERRO).
 		
 		while(cadastro.equals("S")) {
 			identificador_usuario++;
@@ -98,7 +98,7 @@ public class Main {
 				opcao_sexo = "M";
 			}
 			else { 
-				// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO.
+				// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO (PORQUE DÁ ERRO).
 			}
 			
 			if (opcao_sexo.equals("H") || opcao_sexo.equals("M")) {
@@ -123,7 +123,7 @@ public class Main {
 					compras = "N";
 				}
 				else {
-					// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO.
+					// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO (PORQUE DÁ ERRO).
 				}
 				
 				Object[] itens = {"Celular", "Notebook", "Câmera Fotográfica","Óculos", "Impressora", "Lápis", "Caderno", "Caneta", "Agenda"};
@@ -224,25 +224,17 @@ public class Main {
 		System.out.println("****************************************************************************\n");
 		
 		
-		// E PRECISO CONSERTAR A FUNCAO DE ARQUIVOS. GRAVAR OU LER NAO ESTA FUNCIONANDO DIREITO.
-		try {
-			// SALVANDO OS DADOS DE USUARIOS EM ARQUIVO.
-			String nomeDoArquivo = "cadastroUsuarios.dat";
-			Usuario.gravarArquivosEmBinario(admin1.getCadastroUsuarios().getUsuariosCadastrados(), nomeDoArquivo);
-		} catch(IndexOutOfBoundsException e){
-			System.out.println("o erro esta na gravacao");
-		}
+		// GRAVAÇÃO E LEITURA DE ARQUIVOS SUPOSTAMENTE CORRIGIDA PELO LEONARDO.
+		/*
+		// SALVANDO OS DADOS DE USUARIOS EM ARQUIVO.
+		String nomeDoArquivo = "cadastroUsuarios.dat";
+		Usuario.gravarArquivosEmBinario(admin1.getCadastroUsuarios().getUsuariosCadastrados(), nomeDoArquivo);
 		
 		// LENDO OS DADOS DE USUARIOS GRAVADOS EM ARQUIVO.
-		try {
 		System.out.println("Lendo os dados de usuários cadastrados no sistema: ");
 		Usuario.lerArquivosEmBInario(nomeDoArquivo);
-		} catch(IndexOutOfBoundsException e){
-			System.out.println("o erro esta na leitura");
-		}
 		
 		
-		System.out.println("Operação finalizada. \n");
 		*/
 	}
 }
