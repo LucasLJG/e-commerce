@@ -74,7 +74,7 @@ public class Administrador extends Usuario implements Autenticacao{
 			return true;
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Senha inválida. Acesso ao sistema negado!", "Senha inválida!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Senha invalida. Acesso ao sistema negado!", "Senha invalida!", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 	}

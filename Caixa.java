@@ -3,6 +3,8 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Caixa {
 	// Atributos das Classes
 	private int codigo;
@@ -71,25 +73,17 @@ public class Caixa {
 	 * A funcao retorna a variavel armazenadora sendo a ultima posicao o numero de parcelas.
 	 */
 	public ArrayList<BigDecimal> pagamentoParcelado (Usuario cliente) {
-		double parcelas;
+		double parcela;
 		double preco = 0;		
 		ArrayList<Pedido> pedidos  = cliente.getPedidos();
 		ArrayList<BigDecimal> precos = new ArrayList<BigDecimal>();
 		// Perguntando o numero de parcelas.
-		Scanner ler = new Scanner(System.in);
-		System.out.println("Escolha o numero de parcelas entre as opcoes abaixo digitando o numero entre []:");
-		System.out.println("[3]: 3 parcelas\n[6]: 6 parcelas\n[9]: 9 parcelas\n[12]: 12 parcelas");
-		String tipo = ler.nextLine();
-		while (tipo.equals("3") == false  && tipo.equals("6") == false && tipo.equals("9") == false && tipo.equals("12") == false) {
-			System.out.println("Opcao invalida.");
-			System.out.println("Escolha o numero de parcelas entre as opcoes abaixo digitando o numero entre []:");
-			System.out.println("[3]: 3 parcelas\n[6]: 6 parcelas\n[9]: 9 parcelas\n[12]: 12 parcelas");
-			tipo = ler.nextLine();
-		}
-		if (tipo.equals("3")) parcelas = 3;
-		else if (tipo.equals("6")) parcelas = 6;
-		else if (tipo.equals("9")) parcelas = 9;
-		else parcelas = 12;
+		Object[] aux = {"3", "6", "9", "12"};
+		Object tipo = JOptionPane.showInputDialog(null, "Selecione a quantidade de parcelas desejado: ","Selecao da quantidade de parcelas", JOptionPane.INFORMATION_MESSAGE, null, aux, aux);
+		if (tipo.equals("3")) parcela = 3;
+		else if (tipo.equals("6")) parcela = 6;
+		else if (tipo.equals("9")) parcela = 9;
+		else parcela = 12;
 		// Percorrendo o array pedidos e itens.
 		for (Pedido pedido: pedidos) {
 			for (Item item: pedido.getItem()) {
@@ -97,14 +91,14 @@ public class Caixa {
 				preco += item.getPrecoUnitario() * item.getQuantidade();
 			}
 			// Calculando o valor de parcelas e armazenando.
-			preco = preco / parcelas;
+			preco = preco / parcela;
 			BigDecimal preco_corrigido = new BigDecimal(preco).setScale(2, RoundingMode.HALF_EVEN);
 
 			precos.add(preco_corrigido);
 			
 		}
 		
-		BigDecimal parcelas_corrigidas = new BigDecimal(parcelas).setScale(0, RoundingMode.HALF_EVEN);
+		BigDecimal parcelas_corrigidas = new BigDecimal(parcela).setScale(0, RoundingMode.HALF_EVEN);
 		precos.add(parcelas_corrigidas);
 		System.out.println("Pagamento parcelado, sem cobranca de juros. Os valores das parcelas do pedido conforme a sua escolha. ");
 		for (int j = 0; j < precos.size() - 1; j++) {

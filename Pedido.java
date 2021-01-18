@@ -1,7 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Pedido {
+public class Pedido implements Serializable {
+	private static final long serialVersionUID = 300L;
 	private int codigo;
 	private String nomeVendedor;
 	private Calendar dataPedido;

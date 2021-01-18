@@ -1,6 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Item {
+public class Item implements Serializable {
+	private static final long serialVersionUID = 301L;
 	private String nome;
 	private int codigo;
 	private int quantidade;

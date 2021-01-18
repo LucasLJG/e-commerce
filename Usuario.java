@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import java.io.*;
 
 public abstract class Usuario implements Serializable{
@@ -138,14 +141,10 @@ public abstract class Usuario implements Serializable{
 	 * adiciona o item e, em seguida, atualiza os dados do item.
 	 */
 	public void adicionaItem (Item item, Pedido pedido, int quantidade) {
-		Scanner ler = new Scanner(System.in);
 		while(item.getEstoqueDisponivel() < quantidade) {
-			System.out.println("Nao possuimos estoque suficiente desse item.\nSelecione a quantidade");
-			String auxiliar;
-			auxiliar = ler.nextLine();
+			String auxiliar = JOptionPane.showInputDialog(null,"Nao possuimos estoque suficiente desse item. Selecione outra quatidade.");
 			while(Pedido.ehInteiro(auxiliar) == false || auxiliar.isEmpty() == true) {
-				System.out.println("Entrada invalida. Selecione a quantidade");
-				auxiliar = ler.nextLine();
+				auxiliar = JOptionPane.showInputDialog(null,"Entrada invalida. Selecione uma quatidade.");
 			}
 			quantidade = Integer.parseInt(auxiliar);
 		}
@@ -156,62 +155,39 @@ public abstract class Usuario implements Serializable{
 	
 	// GRAVANDO OS OBJETOS EM FORMATO BINARIO NO ARQUIVO.
 	public static void gravarArquivosEmBinario(ArrayList<Usuario> usuarios, String nomeDoArquivo) {
-		//File arquivo = new File(nomeDoArquivo);
 		try {
-			ObjectOutputStream out = new ObjectOutputStream (new FileOutputStream ("Teste.txt"));
+			ObjectOutputStream out = new ObjectOutputStream (new FileOutputStream (nomeDoArquivo));
 			for (Usuario usuario: usuarios)
 			{
 				out.writeObject(usuario);
 				out.flush();
-				out.close();
 			}
-		/*
-			arquivo.delete();
-			arquivo.createNewFile();
-			ObjectOutputStream saida = new ObjectOutputStream(new FileOutputStream(arquivo));
-			saida.writeObject(usuarios);
-			saida.close();
-			*/
+			out.close();
 		}
 		catch(IOException erro) {
-			System.out.println("A operação resultou em erro: " + erro.getMessage());
+			System.out.println("A operacao resultou em erro: " + erro.getMessage());
 		}
 	}
 	
 	// RECUPERANDO OS OBJETOS GRAVADOS EM FORMATO BINARIO NO ARQUIVO.
 	public static void lerArquivosEmBInario(String nomeDoArquivo){
-		/*
-		boolean validador = false;
-		boolean marcador = true;
-		ArrayList<Usuario> usuarios = new ArrayList();
-		try {
-			File arquivo = new File(nomeDoArquivo);
-			if (arquivo.exists()) {
-				ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(arquivo));
-				usuarios = (ArrayList<Usuario>)entrada.readObject();
-				entrada.close();
-				validador = true;
-			}
-		}
-		*/
 		int i = 0;
 		try {
-			ObjectInputStream in = new ObjectInputStream (new FileInputStream ("Teste.txt"));
+			ObjectInputStream in = new ObjectInputStream (new FileInputStream (nomeDoArquivo));
 			while (true) {
 				Usuario usuarioSerializado = (Usuario) in.readObject();
 				System.out.println("*** Lendo Resistro do usuario " + (++ i));
 				System.out.println(usuarioSerializado);
-				
 			}
 		}
 		catch(EOFException endOfFileException) {
 			return;
 		}
 		catch(IOException erro1) {
-			System.out.println("A operação resultou em erro. Descrição do erro: " + erro1.getMessage());
+			System.out.println("A operacao resultou em erro. Descricao do erro: " + erro1.getMessage());
 		}
 		catch (ClassNotFoundException erro2) {
-			System.out.println("A operação resultou em erro. Descrição do erro: " + erro2.getMessage());
+			System.out.println("A operacao resultou em erro. Descricao do erro: " + erro2.getMessage());
 		}
 	}
 	
@@ -220,7 +196,12 @@ public abstract class Usuario implements Serializable{
 		String out = "";
 		out = out + "Identificacao do usuario: " + getIdentificador() + "\n";
 		out = out + "Nome: " + getNome() + "\n";
-		if (this.getPedidos().get(0).getItem().isEmpty()) {
+		if (this.getPedidos().isEmpty())
+		{
+			out = out + "Pedido do Usuario: ";
+			out = out + "O usuario nao tem pedidos realizados.\n";
+		}
+		else if (this.getPedidos().get(0).getItem().isEmpty()) {
 			out = out + "Pedido do Usuario: ";
 			out = out + "O usuario nao tem pedidos realizados.\n";
 		}

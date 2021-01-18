@@ -42,11 +42,10 @@ public class Main {
 		
 		String nome;
 		String senhaAutenticacao;
-		String suaSenha="Sua senha nessa seção é: ";
+		String suaSenha="Sua senha nessa sessao eh: ";
 		int senhi=random.nextInt(1000);
 		suaSenha+=senhi;
 		int aSenha=0;
-		boolean validador = false;
 		
 		// FAZER A AUTENTICACAO DO ADMINISTRADOR NO SISTEMA (PEDIR A SENHA).
 		
@@ -55,10 +54,9 @@ public class Main {
 		} catch (Exception erro) {
 			System.out.println("Erro: " + erro.getMessage());
 		}
-		Object[] opcaoAutenticacao = {"Confirmar","Cancelar"};
 		
 		JOptionPane.showMessageDialog(null, suaSenha, null, JOptionPane.INFORMATION_MESSAGE);
-		senhaAutenticacao = JOptionPane.showInputDialog(null," Ã‰ preciso autenticaÃ§Ã£o do Administrador para entrar no sistema. Por favor digite a senha: ");
+		senhaAutenticacao = JOptionPane.showInputDialog(null," Eh preciso da autenticao do Administrador para entrar no sistema. Por favor digite a senha: ");
 		if(senhaAutenticacao == null) {
 			System.exit(0);
 		}
@@ -83,7 +81,7 @@ public class Main {
 		} catch (Exception erro) {
 			System.out.println("Erro: " + erro.getMessage());
 		}
-		opcaoUsuario = JOptionPane.showConfirmDialog(null,"Bem vindo ao Prime Store! Gostaria de cadastrar um usuÃ¡rio ? ");
+		opcaoUsuario = JOptionPane.showConfirmDialog(null,"Bem vindo ao Prime Store! Gostaria de cadastrar um usuario ? ");
 		if (opcaoUsuario == JOptionPane.YES_OPTION) {
 			cadastro = "S";
 		}
@@ -93,7 +91,7 @@ public class Main {
 		else {
 			System.exit(0);
 		}
-		// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO (PORQUE DÃo ERRO).
+		// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO (PORQUE DA ERRO).
 		
 		while(cadastro.equals("S")) {
 			identificador_usuario++;
@@ -118,7 +116,7 @@ public class Main {
 			
 			int opcaoSexo;
 			Object[] opcao = {"Masculino","Feminino"};
-			opcaoSexo = JOptionPane.showOptionDialog(null,"Selecione seu sexo: ", "Escolha do sexo do usuÃ¡rio", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null ,opcao, opcao);
+			opcaoSexo = JOptionPane.showOptionDialog(null,"Selecione seu sexo: ", "Escolha do sexo do usuario", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null ,opcao, opcao);
 			String opcao_sexo = null;
 			if (opcaoSexo == 0) {
 				opcao_sexo = "H";
@@ -154,24 +152,23 @@ public class Main {
 				else {
 					System.exit(0);
 				}
-				
-				Object[] itens = {"Celular", "Notebook", "CÃ¢mera FotogrÃ¡fica","Ã“culos", "Impressora", "LÃ¡pis", "Caderno", "Caneta", "Agenda"};
-				Object itemSelecionado = JOptionPane.showInputDialog(null, "Selecione o produto desejado: ","SeleÃ§Ã£o de Produtos", JOptionPane.INFORMATION_MESSAGE, null, itens, itens);
-				//Item.listar_catalogo(lista_itens);
-				
-				//POR ALGUM MOTIVO ESTA SAINDO DO PROGRAMA
-				
-				ArrayList<Item> lista_auxiliar;
-				lista_auxiliar = new ArrayList<Item>();
-				
+
 				while(compras.equals("S")) {
 					
-					String opcao_mercadoria;
-					opcao_mercadoria = leitor.nextLine();
+					Object[] itens = {"Celular", "Notebook", "CÃ¢mera FotogrÃ¡fica","Ã“culos", "Impressora", "LÃ¡pis", "Caderno", "Caneta", "Agenda"};
+					Object itemSelecionado = JOptionPane.showInputDialog(null, "Selecione o produto desejado: ","Selecao de Produtos", JOptionPane.INFORMATION_MESSAGE, null, itens, itens);
+					Item.listar_catalogo(lista_itens);
+					int mercadoria = 0;
+					for(int i = 0; i < itens.length; i ++)
+					{
+						if (itemSelecionado == itens[i])
+						{
+							mercadoria = i;
+						}
+					}
 					
-					
-					
-					int mercadoria = Integer.parseInt(opcao_mercadoria);
+					ArrayList<Item> lista_auxiliar;
+					lista_auxiliar = new ArrayList<Item>();
 					
 					// FAZER A INTERFACE GRAFICA DE SELECIONAR QUANTIDADE DE CADA PRODUTO. IDEIA: USAR JSLIDER.
 					
@@ -217,9 +214,9 @@ public class Main {
 				
 				//caso o item nao for vazio, solicitar forma de pagamento
 				if (user1.getPedidos().get(0).getItem().isEmpty() == false) {
-					Object[] formaDePagamento = {"Pagamento Ã  vista","Pagamento Parcelado"};
+					Object[] formaDePagamento = {"Pagamento a� vista","Pagamento Parcelado"};
 					int opcaoPagamento;
-					opcaoPagamento = JOptionPane.showOptionDialog(null,"Selecione seu sexo: ", "Forma de Pagamento", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null , formaDePagamento, formaDePagamento);
+					opcaoPagamento = JOptionPane.showOptionDialog(null,"Selecione o tipo de pagamento: ", "Forma de Pagamento", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null , formaDePagamento, formaDePagamento);
 					if (opcaoPagamento == 0) { // PAGAMENTO A VISTA
 						total.pagamentoVista(user1);
 					}
@@ -233,7 +230,7 @@ public class Main {
 				}
 			}
 			
-			opcaoUsuario = JOptionPane.showConfirmDialog(null,"Gostaria de cadastrar mais usuÃ¡rios no sistema ?");
+			opcaoUsuario = JOptionPane.showConfirmDialog(null,"Gostaria de cadastrar mais usuarios no sistema ?");
 			if (opcaoUsuario == JOptionPane.YES_OPTION) {
 				cadastro = "S";
 			}
@@ -242,7 +239,7 @@ public class Main {
 			}
 			
 			if (cadastro.equals("N")) {
-				System.out.println("Cadastro de usuÃ¡rios encerrado. ");
+				System.out.println("Cadastro de usuarios encerrado. ");
 			}
 		}
 		
@@ -250,22 +247,21 @@ public class Main {
 			
 		//lista de usuarios cadastrados
 		System.out.println(admin1.getCadastroUsuarios());
-		System.out.println("UsuÃ¡rios cadastrados: " + Administrador.getQuantidadeUsuarios());
+		System.out.println("Usuarios cadastrados: " + Administrador.getQuantidadeUsuarios());
 		
 		System.out.println("****************************************************************************\n");
 		
 		
-		// GRAVAÃ‡ÃƒO E LEITURA DE ARQUIVOS SUPOSTAMENTE CORRIGIDA PELO LEONARDO.
-		/*
+		// GRAVACAO E LEITURA DE ARQUIVOS SUPOSTAMENTE CORRIGIDA PELO LEONARDO.
+
 		// SALVANDO OS DADOS DE USUARIOS EM ARQUIVO.
 		String nomeDoArquivo = "cadastroUsuarios.dat";
 		Usuario.gravarArquivosEmBinario(admin1.getCadastroUsuarios().getUsuariosCadastrados(), nomeDoArquivo);
 		
 		// LENDO OS DADOS DE USUARIOS GRAVADOS EM ARQUIVO.
-		System.out.println("Lendo os dados de usuÃ¡rios cadastrados no sistema: ");
+		System.out.println("Lendo os dados de usuarios cadastrados no sistema: ");
 		Usuario.lerArquivosEmBInario(nomeDoArquivo);
 		
 		
-		*/
 	}
 }
