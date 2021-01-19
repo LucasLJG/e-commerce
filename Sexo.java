@@ -21,7 +21,7 @@ public enum Sexo {
 	public String toString() {
 		String out = "";
 		out = out + "Sigla: " + getSigla() + "\n";
-		out = out + "Descrição: " + getDescricao() + "\n";
+		out = out + "Descricao: " + getDescricao() + "\n";
 		return out;
 	}
 }

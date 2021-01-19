@@ -10,8 +10,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-	
-		
 		ArrayList<Item> lista_itens;
 		lista_itens = new ArrayList<Item>();
 		Random random = new Random();
@@ -32,6 +30,7 @@ public class Main {
 		
 		Perfil perfil_admin1 = new Perfil(Sexo.HOMEM, new GregorianCalendar(1987, 12, 21), Estado.MINAS_GERAIS.getCapital(), Estado.MINAS_GERAIS, "15 88888-8888", "123XXXXXXXXX/89");
 		Administrador admin1 = new Administrador(identificador_usuario, "Rafael Santos", "rafael_santos@gmail.com", "react2021", perfil_admin1, true);
+		identificador_usuario++;
 		
 		Perfil perfil_admin2 = new Perfil(Sexo.MULHER, new GregorianCalendar(1980, 12, 15), Estado.SAO_PAULO.getCapital(), Estado.SAO_PAULO, "11 98547-7584", "456XXXXXXXXX/74");
 		Administrador admin2 = new Administrador(identificador_usuario, "Clarice Lopes", "clarice_lopes@gmail.com", "cyberpunk2077", perfil_admin2, true);
@@ -66,7 +65,7 @@ public class Main {
 			System.exit(0);
 		}
 		
-		// NA AUTENTICAÃ‡ÃƒO DE ACESSO, SE A SENHA ESTIVER ERRADA, Ã‰ PARA ENCERRAR O SISTEMA. SE ESTIVER CERTA, ENTÃƒO IR PARA O CADASTRO DE USUÃRIOS.7
+		// NA AUTENTICACAO DE ACESSO, SE A SENHA ESTIVER ERRADA, Ã‰ PARA ENCERRAR O SISTEMA. SE ESTIVER CERTA, ENTAO IR PARA O CADASTRO DE USUARIOS
 		if(senhi!=aSenha) {
 			System.exit(0);
 		}
@@ -155,7 +154,7 @@ public class Main {
 
 				while(compras.equals("S")) {
 					
-					Object[] itens = {"Celular", "Notebook", "CÃ¢mera FotogrÃ¡fica","Ã“culos", "Impressora", "LÃ¡pis", "Caderno", "Caneta", "Agenda"};
+					Object[] itens = {"Celular", "Notebook", "Camera Fotografica","Oculos", "Impressora", "Lapis", "Caderno", "Caneta", "Agenda"};
 					Object itemSelecionado = JOptionPane.showInputDialog(null, "Selecione o produto desejado: ","Selecao de Produtos", JOptionPane.INFORMATION_MESSAGE, null, itens, itens);
 					Item.listar_catalogo(lista_itens);
 					int mercadoria = 0;
@@ -206,7 +205,7 @@ public class Main {
 					
 				}
 				Caixa total = new Caixa(1, true);
-				System.out.printf("Dados de Usuario: \n");
+				System.out.printf("\n\nDados de Usuario: \n");
 				System.out.println(user1);
 				System.out.println("Dados de perfil do Usuario: ");
 				System.out.println(perfil_user1);

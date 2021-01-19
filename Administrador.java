@@ -47,22 +47,22 @@ public class Administrador extends Usuario implements Autenticacao{
 	
 	public void desabilitar_usuario(Usuario usuario_desabilitar) { // desabilita o usuario, porem sem remove-lo do cadastro do sistema
 		if (this.getCadastroUsuarios().getDono().equals(this)) {
-			System.out.println("Você precisa transferir a posse do sistema para outro Administrador antes disso. \n");
+			System.out.println("Voce precisa transferir a posse do sistema para outro Administrador antes disso. \n");
 		}
 		else {
 			if (this.getCadastroUsuarios().getUsuariosCadastrados().isEmpty()) {
-				System.out.println("O sistema não possui usuários cadastrados. \n");
+				System.out.println("O sistema nao possui usuarios cadastrados. \n");
 			}
 			else {
 				if (this.getCadastroUsuarios().getDono().equals(usuario_desabilitar)) {
-					System.out.println("Você não pode desabilitar o dono do sistema. \n");
+					System.out.println("Voce nao pode desabilitar o dono do sistema. \n");
 				}
 				else {
 					if (this.getCadastroUsuarios().getUsuariosCadastrados().contains(usuario_desabilitar)) {
 						usuario_desabilitar.setStatus(false);
 					}
 					else {
-						System.out.println("O usuário não está cadastrado no sistema. \n");
+						System.out.println("O usuario nao esta cadastrado no sistema. \n");
 					}
 				}
 			}
