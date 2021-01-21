@@ -43,10 +43,10 @@ public class UsuarioComum extends Usuario implements Autenticacao {
 				}
 			}
 			else if(opcaoUsuario == JOptionPane.CANCEL_OPTION || opcaoUsuario == JOptionPane.CLOSED_OPTION) {
-				System.exit(0);
+				// NAO FAZ NADA.
 			}
 			else {
-				System.exit(0);
+				// NAO FAZ NADA.
 			}
 		}
 		else {

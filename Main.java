@@ -53,14 +53,7 @@ public class Main {
 		
 		// AUTENTICACAO DO ADMINISTRADOR DO SISTEMA.
 		
-		senhaAutenticacao = JOptionPane.showInputDialog(null," Eh preciso da autenticao do Administrador para entrar no sistema. Por favor digite a senha: ");
-		if(senhaAutenticacao.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
-			System.exit(0);
-		}
-		else {
-			admin1.autenticarAcesso(senhaAutenticacao);
-		}
+		admin1.autenticarAcesso(admin1.getSenha());
 		
 		Scanner leitor = new Scanner(System.in);
 		String compras = null;
@@ -238,7 +231,13 @@ public class Main {
 		usuarioComum1.autenticarAcesso(usuarioComum1.getSenha());
 		
 		// RECUPERANDO A SENHA DE UM USUARIO COMUM USANDO O ADMINISTRADOR DO SISTEMA.
-		usuarioComum1.recuperar_senha(usuarioComum1.getEmail());
+		opcaoUsuario = JOptionPane.showConfirmDialog(null,"Gostaria de recuperar a senha de " + usuarioComum1.getNome() + " ?");
+		if (opcaoUsuario == JOptionPane.YES_OPTION) {
+			usuarioComum1.recuperar_senha(usuarioComum1.getEmail());
+		}
+		else if (opcaoUsuario == JOptionPane.NO_OPTION || opcaoUsuario == JOptionPane.CANCEL_OPTION) {
+			// NAO FAZ NADA.
+		}
 		
 		System.out.println("****************************************************************************");
 			

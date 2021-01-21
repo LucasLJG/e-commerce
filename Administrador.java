@@ -71,7 +71,7 @@ public class Administrador extends Usuario implements Autenticacao{
 	
 	public void autenticarAcesso(String senhaUsuario) {
 		if (this.getSenha().equals(senhaUsuario)) {
-			JOptionPane.showMessageDialog(null, "Acesso autorizado!", "Senha valida.", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Autenticacao do administrador do sistema efetuada com sucesso!", "Senha valida.", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Senha invalida. Acesso ao sistema negado!", "Senha invalida!", JOptionPane.ERROR_MESSAGE);
