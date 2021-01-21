@@ -89,52 +89,30 @@ public abstract class Usuario implements Serializable{
 		if(this.getStatus() == true) {
 		
 			if (this.getEmail() == email) {
-				System.out.println("Digite o numero do seu cpf para confirmacao de autenticidade: \n");
-				Scanner dados = new Scanner(System.in);
-				String entrada = dados.nextLine();
-				if (this.getPerfil().getCpf().equals(entrada) == true) {
-					System.out.println("Senha: ");
-					System.out.println(this.getSenha());
-				}
-				else {
-					System.out.println("Numero de CPF invalido. \n");
-				}
+				JOptionPane.showMessageDialog(null, "A senha de " + this.getNome() + " eh: " + this.getSenha() , "Recuperacao de senha", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else{
-				System.out.println("Endereco de e-mail invalido. \n");
+				JOptionPane.showMessageDialog(null, "Os dados informados sao invalidos.", "Dados invalidos.", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else {
-			System.out.println("Usuario desativado. \n");
+			JOptionPane.showMessageDialog(null, "O usuario encontra-se desativado no sistema.", "Usuario desativado.", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
-	public void alterar_senha(String email, String senha) {
+	public void alterar_senha(String email, String senha, String novaSenha) {
 		
 		if(status == true) {
 			
-			if (this.getEmail().equals(email)== true && this.getSenha().equals(senha) == true) {
-				System.out.println("Como medida adicional de seguranca, por favor digite o numero de seu CPF no formato (YYYXXX/ZA): ");
-				Scanner cpf_usuario = new Scanner(System.in);
-				String cpf_paraValidar = cpf_usuario.nextLine();
-				if (this.getPerfil().getCpf().equals(cpf_paraValidar)) {
-					System.out.println("CPF validado com sucesso. \n");
-					System.out.printf("Digite a nova senha de %s: \n", this.getNome());
-					Scanner senha_nova = new Scanner(System.in);
-					String senha_atual = senha_nova.nextLine();
-					this.setSenha(senha_atual);
-					System.out.println("Senha alterada com sucesso. \n");
-				}
-				else {
-					System.out.println("CPF invalido. \n");
-				}
+			if (this.getEmail().equals(email) == true && this.getSenha().equals(senha) == true) {
+				this.setSenha(novaSenha);
 			}
 			else {
-				System.out.println("Dados invalidos. \n");
+				JOptionPane.showMessageDialog(null, "Os dados informados sao invalidos.", "Dados invalidos.", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else {
-			System.out.println("Usuario desativado. \n");
+			JOptionPane.showMessageDialog(null, "O usuario encontra-se desativado no sistema.", "Usuario desativado.", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	/* Essa funcao adiciona um item na lista de item de cada pedido. Para isso, ela acessa o pedido e

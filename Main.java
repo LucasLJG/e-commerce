@@ -33,9 +33,14 @@ public class Main {
 		Perfil perfil_admin2 = new Perfil(Sexo.MULHER, new GregorianCalendar(1980, 12, 15), Estado.SAO_PAULO.getCapital(), Estado.SAO_PAULO, "11 98547-7584", "456XXXXXXXXX/74");
 		Administrador admin2 = new Administrador(identificador_usuario, "Clarice Lopes", "clarice_lopes@gmail.com", "cyberpunk2077", perfil_admin2, true);
 		
+		identificador_usuario++;
+		Perfil perfil_usuarioComum = new Perfil(Sexo.MULHER, new GregorianCalendar(1976,10,12), Estado.SAO_PAULO.getCapital(), Estado.SAO_PAULO, "11 98756-9687", "486XXXXXXXXX/75");
+		UsuarioComum usuarioComum1 = new UsuarioComum(identificador_usuario, "Nicole Dantas", "nicoledantas@outlook.com", "nick789", perfil_usuarioComum, true);
+		
 		admin1.criarCadastro(admin1);
 		admin1.getCadastroUsuarios().setDono(admin1);
 		admin1.criarCadastro(admin2);
+		admin1.criarCadastro(usuarioComum1);
 		
 		String nome;
 		String senhaAutenticacao;
@@ -49,7 +54,8 @@ public class Main {
 		// AUTENTICACAO DO ADMINISTRADOR DO SISTEMA.
 		
 		senhaAutenticacao = JOptionPane.showInputDialog(null," Eh preciso da autenticao do Administrador para entrar no sistema. Por favor digite a senha: ");
-		if(senhaAutenticacao == null) {
+		if(senhaAutenticacao.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 			System.exit(0);
 		}
 		else {
@@ -82,19 +88,22 @@ public class Main {
 			identificador_pedido++;
 			
 			nome = JOptionPane.showInputDialog("Digite seu nome: ");
-			if(nome == null) {
+			if(nome.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "O nome nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			
 			String email;
 			email = JOptionPane.showInputDialog("Digite seu email: ");
-			if(email == null) {
+			if(email.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "O email nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			
 			String senha;
 			senha = JOptionPane.showInputDialog("Digite sua senha: ");
-			if(senha == null) {
+			if(senha.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			
@@ -224,6 +233,12 @@ public class Main {
 				System.out.println("Cadastro de usuarios encerrado. ");
 			}
 		}
+		
+		// USUARIO UTILIZANDO A INTERFACE IMPLEMENTADA NA CLASSE USUARIOCOMUM.
+		usuarioComum1.autenticarAcesso(usuarioComum1.getSenha());
+		
+		// RECUPERANDO A SENHA DE UM USUARIO COMUM USANDO O ADMINISTRADOR DO SISTEMA.
+		usuarioComum1.recuperar_senha(usuarioComum1.getEmail());
 		
 		System.out.println("****************************************************************************");
 			

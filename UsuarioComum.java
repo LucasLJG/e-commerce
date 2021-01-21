@@ -29,15 +29,17 @@ public class UsuarioComum extends Usuario implements Autenticacao {
 	public void autenticarAcesso(String senhaUsuario) {
 		if (this.getSenha().equals(senhaUsuario)) {
 			int opcaoUsuario;
-			opcaoUsuario = JOptionPane.showConfirmDialog(null,"Gostaria de alterar a sua senha atual ?");
+			opcaoUsuario = JOptionPane.showConfirmDialog(null,"Gostaria de alterar a senha atual de " + this.getNome() + " ?");
 			if (opcaoUsuario == JOptionPane.YES_OPTION) {
 				String novaSenha;
 				novaSenha = JOptionPane.showInputDialog("Digite sua nova senha: ");
-				if (novaSenha == null) { // senha invalida.
+				if (novaSenha.isEmpty()) { // senha invalida.
+					JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 				else {
-					this.alterar_senha(this.getEmail(), novaSenha);
+					this.alterar_senha(this.getEmail(), senhaUsuario, novaSenha);
+					JOptionPane.showMessageDialog(null, "Senha alterada!", "Alteracao de senha", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 			else if(opcaoUsuario == JOptionPane.CANCEL_OPTION || opcaoUsuario == JOptionPane.CLOSED_OPTION) {
