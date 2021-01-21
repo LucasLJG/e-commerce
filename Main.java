@@ -40,15 +40,13 @@ public class Main {
 		String nome;
 		String senhaAutenticacao;
 		
-		// FAZER A AUTENTICACAO DO ADMINISTRADOR NO SISTEMA (PEDIR A SENHA).
-		
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		} catch (Exception erro) {
 			System.out.println("Erro: " + erro.getMessage());
 		}
 		
-		// NA AUTENTICACAO DE ACESSO, SE A SENHA ESTIVER ERRADA, EH PARA ENCERRAR O SISTEMA. SE ESTIVER CERTA, ENTAO IR PARA O CADASTRO DE USUARIOS
+		// AUTENTICACAO DO ADMINISTRADOR DO SISTEMA.
 		
 		senhaAutenticacao = JOptionPane.showInputDialog(null," Eh preciso da autenticao do Administrador para entrar no sistema. Por favor digite a senha: ");
 		if(senhaAutenticacao == null) {
@@ -78,7 +76,6 @@ public class Main {
 		else {
 			System.exit(0);
 		}
-		// E PRECISO TRATAR CASO QUANDO O USUARIO CLICA NO BOTAO CANCELAR OU CLICA NO X PRA FECHAR A CAIXA DE DIALOGO (PORQUE DA ERRO).
 		
 		while(cadastro.equals("S")) {
 			identificador_usuario++;
@@ -156,9 +153,7 @@ public class Main {
 					
 					ArrayList<Item> lista_auxiliar;
 					lista_auxiliar = new ArrayList<Item>();
-					
-					// FAZER A INTERFACE GRAFICA DE SELECIONAR QUANTIDADE DE CADA PRODUTO. IDEIA: USAR JSLIDER.
-					
+									
 					String quantidade_mercadoria;
 					int quantidade=0;
 					
@@ -166,18 +161,18 @@ public class Main {
 					try {
 						quantidade=Integer.parseInt(quantidade_mercadoria);
 					} catch (Exception erro) {
-						System.exit(0); //DA PRA TRATAR ISSO SEM SER COM SYSTEM.EXIT, GOSTARIA DE IDEIAS
+						System.exit(0); 
 					}
 					
-					//instanciacao de um novo item baseado no produto escolhido
+					//INSTANCIACAO DE UM NOVO ITEM BASEADO NO PRODUTO ESCOLHIDO PELO USUARIO.
 					Item auxiliar = new Item(lista_itens.get(mercadoria).getNome(), lista_itens.get(mercadoria).getCodigo(), 
 							lista_itens.get(mercadoria).getQuantidade(), lista_itens.get(mercadoria).getPrecoUnitario(), 
 							lista_itens.get(mercadoria).getEstoqueDisponivel(), true, lista_auxiliar);
 					
-					//adicionar item ao pedido do usuario
+					//ADICIONAR ITEM AO PEDIDO DO USUARIO.
 					user1.adicionaItem(auxiliar, pedido1_user1, quantidade);
 					
-					//alterar estoque dos itens da lista de itens
+					//ATUALIZAR CAPACIDADE DO ESTOQUE.
 					lista_itens.get(mercadoria).setEstoqueDisponivel(auxiliar.getEstoqueDisponivel());
 					
 					opcaoUsuario = JOptionPane.showConfirmDialog(null," Gostaria de comprar mais produtos ?");
@@ -199,15 +194,15 @@ public class Main {
 				System.out.println(perfil_user1);
 				System.out.println("****************************************************************************");
 				
-				//caso o item nao for vazio, solicitar forma de pagamento
+				//CASO O ITEM NAO FOR VAZIO, SOLICITAR FORMA DE PAGAMENTO.
 				if (user1.getPedidos().get(0).getItem().isEmpty() == false) {
 					Object[] formaDePagamento = {"Pagamento a vista","Pagamento Parcelado"};
 					int opcaoPagamento;
 					opcaoPagamento = JOptionPane.showOptionDialog(null,"Selecione o tipo de pagamento: ", "Forma de Pagamento", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null , formaDePagamento, formaDePagamento);
-					if (opcaoPagamento == 0) { // PAGAMENTO A VISTA
+					if (opcaoPagamento == 0) { // PAGAMENTO A VISTA.
 						total.pagamentoVista(user1);
 					}
-					else if (opcaoPagamento == 1) { // PAGAMENTO PARCELADO
+					else if (opcaoPagamento == 1) { // PAGAMENTO PARCELADO.
 						total.pagamentoParcelado(user1);
 					}
 					else {
@@ -232,14 +227,14 @@ public class Main {
 		
 		System.out.println("****************************************************************************");
 			
-		//lista de usuarios cadastrados
+		//LISTA DE USUARIOS CADASTRADOS.
 		System.out.println(admin1.getCadastroUsuarios());
 		System.out.println("Usuarios cadastrados: " + Administrador.getQuantidadeUsuarios());
 		
 		System.out.println("****************************************************************************\n");
 		
 		
-		// GRAVACAO E LEITURA DE ARQUIVOS SUPOSTAMENTE CORRIGIDA PELO LEONARDO.
+		// GRAVACAO E LEITURA DE ARQUIVOS.
 
 		// SALVANDO OS DADOS DE USUARIOS EM ARQUIVO.
 		String nomeDoArquivo = "cadastroUsuarios.dat";

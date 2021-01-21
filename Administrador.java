@@ -45,7 +45,7 @@ public class Administrador extends Usuario implements Autenticacao{
 		}
 	}
 	
-	public void desabilitar_usuario(Usuario usuario_desabilitar) { // desabilita o usuario, porem sem remove-lo do cadastro do sistema
+	public void desabilitar_usuario(Usuario usuario_desabilitar) { 
 		if (this.getCadastroUsuarios().getDono().equals(this)) {
 			System.out.println("Voce precisa transferir a posse do sistema para outro Administrador antes disso. \n");
 		}
@@ -71,7 +71,7 @@ public class Administrador extends Usuario implements Autenticacao{
 	
 	public void autenticarAcesso(String senhaUsuario) {
 		if (this.getSenha().equals(senhaUsuario)) {
-			JOptionPane.showMessageDialog(null, "Acesso autorizado!", null, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Acesso autorizado!", "Senha valida.", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Senha invalida. Acesso ao sistema negado!", "Senha invalida!", JOptionPane.ERROR_MESSAGE);
