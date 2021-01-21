@@ -3,7 +3,6 @@ import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.io.*;
 import javax.swing.*;
-import java.util.Random;
 
 public class Main {
 
@@ -12,7 +11,6 @@ public class Main {
 		
 		ArrayList<Item> lista_itens;
 		lista_itens = new ArrayList<Item>();
-		Random random = new Random();
 		
 		int identificador_usuario = 1589;
 		int identificador_pedido = 1547;
@@ -41,10 +39,6 @@ public class Main {
 		
 		String nome;
 		String senhaAutenticacao;
-		String suaSenha="Sua senha nessa sessao eh: ";
-		int senhi=random.nextInt(1000);
-		suaSenha+=senhi;
-		int aSenha=0;
 		
 		// FAZER A AUTENTICACAO DO ADMINISTRADOR NO SISTEMA (PEDIR A SENHA).
 		
@@ -54,20 +48,14 @@ public class Main {
 			System.out.println("Erro: " + erro.getMessage());
 		}
 		
-		JOptionPane.showMessageDialog(null, suaSenha, null, JOptionPane.INFORMATION_MESSAGE);
+		// NA AUTENTICACAO DE ACESSO, SE A SENHA ESTIVER ERRADA, EH PARA ENCERRAR O SISTEMA. SE ESTIVER CERTA, ENTAO IR PARA O CADASTRO DE USUARIOS
+		
 		senhaAutenticacao = JOptionPane.showInputDialog(null," Eh preciso da autenticao do Administrador para entrar no sistema. Por favor digite a senha: ");
 		if(senhaAutenticacao == null) {
 			System.exit(0);
 		}
-		try {
-			aSenha=Integer.parseInt(senhaAutenticacao);
-		} catch (Exception erro) {
-			System.exit(0);
-		}
-		
-		// NA AUTENTICACAO DE ACESSO, SE A SENHA ESTIVER ERRADA, Ã‰ PARA ENCERRAR O SISTEMA. SE ESTIVER CERTA, ENTAO IR PARA O CADASTRO DE USUARIOS
-		if(senhi!=aSenha) {
-			System.exit(0);
+		else {
+			admin1.autenticarAcesso(senhaAutenticacao);
 		}
 		
 		Scanner leitor = new Scanner(System.in);
@@ -174,7 +162,7 @@ public class Main {
 					String quantidade_mercadoria;
 					int quantidade=0;
 					
-					quantidade_mercadoria = JOptionPane.showInputDialog(null,"Quantos deseja comparar?");
+					quantidade_mercadoria = JOptionPane.showInputDialog(null," Quantos deseja comparar?");
 					try {
 						quantidade=Integer.parseInt(quantidade_mercadoria);
 					} catch (Exception erro) {
@@ -192,7 +180,7 @@ public class Main {
 					//alterar estoque dos itens da lista de itens
 					lista_itens.get(mercadoria).setEstoqueDisponivel(auxiliar.getEstoqueDisponivel());
 					
-					opcaoUsuario = JOptionPane.showConfirmDialog(null,"Gostaria de comprar mais produtos ?");
+					opcaoUsuario = JOptionPane.showConfirmDialog(null," Gostaria de comprar mais produtos ?");
 					if (opcaoUsuario == JOptionPane.YES_OPTION) {
 						compras = "S";
 					}
@@ -213,7 +201,7 @@ public class Main {
 				
 				//caso o item nao for vazio, solicitar forma de pagamento
 				if (user1.getPedidos().get(0).getItem().isEmpty() == false) {
-					Object[] formaDePagamento = {"Pagamento a� vista","Pagamento Parcelado"};
+					Object[] formaDePagamento = {"Pagamento a vista","Pagamento Parcelado"};
 					int opcaoPagamento;
 					opcaoPagamento = JOptionPane.showOptionDialog(null,"Selecione o tipo de pagamento: ", "Forma de Pagamento", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null , formaDePagamento, formaDePagamento);
 					if (opcaoPagamento == 0) { // PAGAMENTO A VISTA

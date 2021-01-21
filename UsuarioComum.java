@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class UsuarioComum extends Usuario implements Autenticacao {
 	private static final long serialVersionUID = 305L;
 	public UsuarioComum(int identificador, String nome, String email, String senha, Perfil perfil, boolean status) {
@@ -24,29 +26,30 @@ public class UsuarioComum extends Usuario implements Autenticacao {
 		}
 	}
 	
-	public boolean autenticarAcesso(String senhaUsuario) {
+	public void autenticarAcesso(String senhaUsuario) {
 		if (this.getSenha().equals(senhaUsuario)) {
-			System.out.println("Acesso concedido com sucesso! \n");
-			System.out.println("Gostaria de atualizar suas informacoes de cadastro ? Digite [1] para alterar sua senha ou [2] para recuperar sua senha: ");
-			Scanner entrada_usuario = new Scanner(System.in);
-			String opcao_usuario = entrada_usuario.nextLine();
-			while (opcao_usuario.equals("1") == false && opcao_usuario.equals("2") == false) {
-				System.out.println("Entrada invalida. Digite [1] ou [2] (valor numerico dentro de []) para acessar sua opcao.");
-				System.out.println("Gostaria de atualizar suas informacoes de cadastro ? Digite [1] para alterar sua senha ou [2] para recuperar sua senha: ");
-				opcao_usuario = entrada_usuario.nextLine();
+			int opcaoUsuario;
+			opcaoUsuario = JOptionPane.showConfirmDialog(null,"Gostaria de alterar a sua senha atual ?");
+			if (opcaoUsuario == JOptionPane.YES_OPTION) {
+				String novaSenha;
+				novaSenha = JOptionPane.showInputDialog("Digite sua nova senha: ");
+				if (novaSenha == null) { // senha invalida.
+					System.exit(0);
+				}
+				else {
+					this.alterar_senha(this.getEmail(), novaSenha);
+				}
 			}
-			if (opcao_usuario.contentEquals("1")) {
-				this.alterar_senha(this.getEmail(), this.getSenha());
+			else if(opcaoUsuario == JOptionPane.CANCEL_OPTION || opcaoUsuario == JOptionPane.CLOSED_OPTION) {
+				System.exit(0);
 			}
 			else {
-				this.recuperar_senha(this.getEmail());
+				System.exit(0);
 			}
-			entrada_usuario.close();
-			return true;
 		}
 		else {
-			System.out.println("Senha invalida! Acesso nao autorizado ao sistema. \n");
-			return false;
+			JOptionPane.showMessageDialog(null, "Senha invalida!", null, JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
 		}
 	}
 	

@@ -1,4 +1,4 @@
 
 public interface Autenticacao {
-	boolean autenticarAcesso(String senhaUsuario);
+	void autenticarAcesso(String senhaUsuario);
 }
