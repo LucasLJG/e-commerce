@@ -78,21 +78,21 @@ public class Main {
 			
 			nome = JOptionPane.showInputDialog("Digite seu nome: ");
 			
-			if(nome == null) {
+			if(nome == null || nome.isEmpty()) {
 				JOptionPane.showMessageDialog(null,"O nome nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			
 			String email = null;
 			email = JOptionPane.showInputDialog("Digite seu email: ");
-			if(email == null) {
+			if(email == null || email.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "O email nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			
 			String senha = null;
 			senha = JOptionPane.showInputDialog("Digite sua senha: ");
-			if(senha == null) {
+			if(senha == null || senha.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
