@@ -32,14 +32,12 @@ public class UsuarioComum extends Usuario implements Autenticacao {
 			if (opcaoUsuario == JOptionPane.YES_OPTION) {
 				String novaSenha;
 				novaSenha = JOptionPane.showInputDialog("Digite sua nova senha: ");
-				if (novaSenha.isEmpty()) { // senha invalida.
+				while (novaSenha.isEmpty()) { // senha invalida.
 					JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
-					System.exit(0);
+					novaSenha = JOptionPane.showInputDialog("Digite sua nova senha: ");
 				}
-				else {
-					this.alterar_senha(this.getEmail(), senhaUsuario, novaSenha);
-					JOptionPane.showMessageDialog(null, "Senha alterada!", "Alteracao de senha", JOptionPane.INFORMATION_MESSAGE);
-				}
+				this.alterar_senha(this.getEmail(), senhaUsuario, novaSenha);
+				JOptionPane.showMessageDialog(null, "Senha alterada!", "Alteracao de senha", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else if(opcaoUsuario == JOptionPane.CANCEL_OPTION || opcaoUsuario == JOptionPane.CLOSED_OPTION) {
 				// NAO FAZ NADA.

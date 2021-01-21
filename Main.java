@@ -77,23 +77,23 @@ public class Main {
 			identificador_pedido++;
 			
 			nome = JOptionPane.showInputDialog("Digite seu nome: ");
-			if(nome.isEmpty()) {
+			while(nome.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "O nome nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
-				System.exit(0);
+				nome = JOptionPane.showInputDialog("Digite seu nome: ");
 			}
 			
 			String email;
 			email = JOptionPane.showInputDialog("Digite seu email: ");
-			if(email.isEmpty()) {
+			while(email.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "O email nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
-				System.exit(0);
+				email = JOptionPane.showInputDialog("Digite seu email: ");
 			}
 			
 			String senha;
 			senha = JOptionPane.showInputDialog("Digite sua senha: ");
-			if(senha.isEmpty()) {
+			while(senha.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
-				System.exit(0);
+				senha = JOptionPane.showInputDialog("Digite sua senha: ");
 			}
 			
 			int opcaoSexo;
