@@ -31,7 +31,7 @@ public class UsuarioComum extends Usuario implements Autenticacao {
 			if (opcaoUsuario == JOptionPane.YES_OPTION) {
 				String novaSenha = null;
 				novaSenha = JOptionPane.showInputDialog("Digite sua nova senha: ");
-				if (novaSenha.isEmpty()) { // senha invalida.
+				if (novaSenha == null) { // senha invalida.
 					JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 					System.exit(0);
 				}

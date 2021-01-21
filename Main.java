@@ -83,17 +83,16 @@ public class Main {
 				System.exit(0);
 			}
 			
-			
 			String email = null;
 			email = JOptionPane.showInputDialog("Digite seu email: ");
-			if(email.isEmpty()) {
+			if(email == null) {
 				JOptionPane.showMessageDialog(null, "O email nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			
 			String senha = null;
 			senha = JOptionPane.showInputDialog("Digite sua senha: ");
-			if(senha.isEmpty()) {
+			if(senha == null) {
 				JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
