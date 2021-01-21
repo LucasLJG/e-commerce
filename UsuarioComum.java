@@ -1,4 +1,3 @@
-
 import javax.swing.JOptionPane;
 
 public class UsuarioComum extends Usuario implements Autenticacao {
@@ -32,12 +31,14 @@ public class UsuarioComum extends Usuario implements Autenticacao {
 			if (opcaoUsuario == JOptionPane.YES_OPTION) {
 				String novaSenha;
 				novaSenha = JOptionPane.showInputDialog("Digite sua nova senha: ");
-				while (novaSenha.isEmpty()) { // senha invalida.
+				if (novaSenha.isEmpty()) { // senha invalida.
 					JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
-					novaSenha = JOptionPane.showInputDialog("Digite sua nova senha: ");
+					System.exit(0);
 				}
-				this.alterar_senha(this.getEmail(), senhaUsuario, novaSenha);
-				JOptionPane.showMessageDialog(null, "Senha alterada!", "Alteracao de senha", JOptionPane.INFORMATION_MESSAGE);
+				else {
+					this.alterar_senha(this.getEmail(), senhaUsuario, novaSenha);
+					JOptionPane.showMessageDialog(null, "Senha alterada!", "Alteracao de senha", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 			else if(opcaoUsuario == JOptionPane.CANCEL_OPTION || opcaoUsuario == JOptionPane.CLOSED_OPTION) {
 				// NAO FAZ NADA.
