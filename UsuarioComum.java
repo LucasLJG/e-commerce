@@ -29,7 +29,7 @@ public class UsuarioComum extends Usuario implements Autenticacao {
 			int opcaoUsuario;
 			opcaoUsuario = JOptionPane.showConfirmDialog(null,"Gostaria de alterar a senha atual de " + this.getNome() + " ?");
 			if (opcaoUsuario == JOptionPane.YES_OPTION) {
-				String novaSenha;
+				String novaSenha = null;
 				novaSenha = JOptionPane.showInputDialog("Digite sua nova senha: ");
 				if (novaSenha.isEmpty()) { // senha invalida.
 					JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);

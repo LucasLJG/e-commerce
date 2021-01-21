@@ -40,7 +40,6 @@ public class Main {
 		admin1.criarCadastro(admin2);
 		admin1.criarCadastro(usuarioComum1);
 		
-		String nome;
 		
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -52,6 +51,7 @@ public class Main {
 		
 		admin1.autenticarAcesso(admin1.getSenha());
 		
+		String nome = null;
 		String compras = null;
 		String cadastro = null;
 		int opcaoUsuario;
@@ -77,19 +77,21 @@ public class Main {
 			identificador_pedido++;
 			
 			nome = JOptionPane.showInputDialog("Digite seu nome: ");
-			if(nome.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "O nome nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
+			
+			if(nome == null) {
+				JOptionPane.showMessageDialog(null,"O nome nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			
-			String email;
+			
+			String email = null;
 			email = JOptionPane.showInputDialog("Digite seu email: ");
 			if(email.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "O email nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
 			
-			String senha;
+			String senha = null;
 			senha = JOptionPane.showInputDialog("Digite sua senha: ");
 			if(senha.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "A senha nao pode ser um campo vazio!", "Campo vazio", JOptionPane.INFORMATION_MESSAGE);
