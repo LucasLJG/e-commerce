@@ -1,7 +1,5 @@
-import java.util.Scanner;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
-import java.io.*;
 import javax.swing.*;
 
 public class Main {
@@ -43,7 +41,6 @@ public class Main {
 		admin1.criarCadastro(usuarioComum1);
 		
 		String nome;
-		String senhaAutenticacao;
 		
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -55,7 +52,6 @@ public class Main {
 		
 		admin1.autenticarAcesso(admin1.getSenha());
 		
-		Scanner leitor = new Scanner(System.in);
 		String compras = null;
 		String cadastro = null;
 		int opcaoUsuario;
